@@ -1,27 +1,39 @@
-import { useState } from "react";
+import { useFormik } from "formik";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if(!email || !password){
-      alert("Es indespensable para que aprendeas cosas interesanter que compretes");
-    } else {
-      window.location = "https://cybermap.kaspersky.com"
-    }
+  const initialValues = {
+    email:"",
+    password:""
   }
+
+  const validate = (values) => {
+    const errors = {};
+
+    if(!values.email) errors.email = "EL Email es requerido";
+    if(!values.password) errors.password = "La Contraseña es requerida";
+
+    return errors
+  }
+
+  const onSubmit = () => {
+    localStorage.setItem("logged",true)
+  }
+
+  const formik = useFormik({initialValues, validate, onSubmit})
+  const {handleChange,handleSubmit,values,errors} = formik;
+
   return (
     <form onSubmit={handleSubmit}>
       <h1>Iniciar sesión</h1>
       <div>
         <label htmlFor="email">Email</label>
-        <input onChange={(e)=>setEmail(e.target.value)} type="email" name="email" id="email" value={email} />
+        <input onChange={handleChange} value={values.email} type="email" name="email" id="email" />
+        {errors.email && <div>{errors.email}</div>}
       </div>
       <div>
         <label htmlFor="password">Contraseña</label>
-        <input onChange={(e)=>setPassword(e.target.value)} type="password" name="password" id="password" value={password} />
+        <input onChange={handleChange} value={values.password}  type="password" name="password" id="password"/>
+        {errors.password && <div>{errors.password}</div>}
       </div>
       <div>
         <button type="submit">Enviar</button>
