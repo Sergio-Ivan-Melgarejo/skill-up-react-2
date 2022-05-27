@@ -1,6 +1,10 @@
-import './App.css';
+
+// Components
 import Login from "./components/Login/Login"
 // import Register from './components/Register/Register';
+
+// Style
+import './App.css';
 
 export default function App () {
   return (
