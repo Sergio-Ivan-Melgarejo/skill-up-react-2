@@ -1,5 +1,9 @@
-const Taks = () => {
-  return <div className="container">Taks</div>;
+import Header from "../../Header/Header";
+
+function Taks () {
+  return (
+    <Header />
+  )
 };
 
 export default Taks;

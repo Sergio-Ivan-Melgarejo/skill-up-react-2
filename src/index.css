@@ -1,3 +1,8 @@
+:root{
+  --color-1:#2B0548;
+  --color-2:#4630AB;
+}
+
 body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
