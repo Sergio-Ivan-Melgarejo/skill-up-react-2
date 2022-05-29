@@ -1,0 +1,68 @@
+#tasks {
+    padding: 20px 15px 5px;
+}
+
+#tasks .wrapper_list {
+    background-color: #fafafa;
+    border-radius: var(--global-border-radius);
+    height: calc(100vh - 100px);
+    padding: 10px;
+    box-shadow: 0 2px 5px #dbdbdb;
+}
+
+#tasks .wrapper_list h2 {
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+#tasks .card {
+    background-color: #fff;
+    border-radius: 12px;
+    margin-bottom: .8rem;
+    padding: .8rem 1.1rem .9rem;
+    position: relative;
+    transition: transform .2s ease-out;
+}
+
+#tasks .card .close {
+    cursor: pointer;
+    position: absolute;
+    right: 12px;
+    top: 10px;
+    font-size: 18px;
+}
+
+#tasks .card h3{
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 0 0 .2rem;
+}
+
+#tasks .card h5,
+#tasks .card h6 {
+    color: #424242;
+    font-size: .6rem;
+    margin: 0 0 .1rem;
+}
+
+#tasks .card button {
+    border-radius: 4px;
+    border-width: 1px;
+    font-size: .6rem;
+    font-weight: 700;
+    margin: .35rem .2rem .15rem 0;
+    padding: .075rem .3rem;
+    background-color: var(--global-primary-color);
+    border-color: var(--global-primary-color);
+    color: var(--global-bg-color-soft);
+}
+
+#tasks .card p {
+    color: #424242;
+    display: block;
+}
+
+/* falta - no mostro todo */
+
+
+
