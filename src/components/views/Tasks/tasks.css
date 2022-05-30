@@ -1,5 +1,7 @@
 #tasks {
     padding: 20px 15px 5px;
+    display: flex;
+    flex-direction: column;
 }
 
 #tasks .wrapper_list {
@@ -8,6 +10,7 @@
     height: calc(100vh - 100px);
     padding: 10px;
     box-shadow: 0 2px 5px #dbdbdb;
+    flex: 2;
 }
 
 
@@ -36,6 +39,8 @@
     padding: .8rem 1.1rem .9rem;
     position: relative;
     transition: transform .2s ease-out;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
 #tasks .card .close {
@@ -74,4 +79,16 @@
 #tasks .card p {
     color: #424242;
     display: block;
+}
+
+@media (min-width:900px) {
+    #tasks {
+        flex-direction: row;
+    }
+}
+
+@media (min-width:1300px) {
+    #tasks .wrapper_list {
+        flex: 1;
+    }
 }
