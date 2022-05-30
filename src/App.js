@@ -9,15 +9,10 @@ import "./App.css";
 import Tasks from "./components/views/Tasks/Tasks";
 import Login from "./components/views/Login/Login";
 
-// Components
-
-
-
 const Error404 =  lazy(() => import("./components/views/Error404/Error404"));
 
 function RequiredAuth({ children }) {
   if (!localStorage.getItem("logged")) {
-    console.log("das");
     return <Navigate to="/login" replace={true} />;
   }
   return children;

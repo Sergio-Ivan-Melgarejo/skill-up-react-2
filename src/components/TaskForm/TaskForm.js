@@ -1,27 +1,27 @@
 // Library
-import { Formik, useFormik } from "formik";
+import { useFormik } from "formik";
 import * as Yup from "yup";
 
 // Style
 import "./task-form.css";
 
 const msg = {
-  reduired: "* Este campor obligatorio",
-  "title-min": "* Tiene que contener al menos 6 caracteres",
+    reduired: "* Este campor obligatorio",
+    "title-min": "* Tiene que contener al menos 6 caracteres",
 };
 
-function TaskForm() {
-  const initialValues = {
+const initialValues = {
     title: "",
     status: "",
     priority: "",
     description: "",
-  };
+};
 
-  const onSubmit = () => {
+const onSubmit = () => {
     alert("paso");
-  };
+};
 
+function TaskForm() {
   const validationSchema = Yup.object().shape({
     title: Yup.string().required(msg["reduired"]).min(6, msg["title-min"]),
 
@@ -45,7 +45,7 @@ function TaskForm() {
             placeholder="titulo ..."
             onChange={handleChange}
             onBlur={handleBlur}
-            className={errors.title ? "error" : ""}
+            className={errors.title && touched.title ? "error" : ""}
           />
           {errors.title && touched.title && <span className="error-message">{errors.title}</span>}
         </div>
@@ -55,7 +55,7 @@ function TaskForm() {
             name="status"
             onChange={handleChange}
             onBlur={handleBlur}
-            className={errors.status ? "error" : ""}
+            className={errors.status && touched.status  ? "error" : ""}
           >
             <option value="">Seleccionar opción</option>
             <option value="new">Nueva</option>
@@ -70,7 +70,7 @@ function TaskForm() {
             name="priority"
             onChange={handleChange}
             onBlur={handleBlur}
-            className={errors.priority ? "error" : ""}
+            className={errors.priority && touched.priority  ? "error" : ""}
           >
             <option value="">Seleccionar opción</option>
             <option value="low">Baja</option>
