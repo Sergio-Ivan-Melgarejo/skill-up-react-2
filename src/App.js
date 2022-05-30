@@ -6,7 +6,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import "./App.css";
 
 // Views
-import Taks from "./components/views/Tasks/Taks";
+import Tasks from "./components/views/Tasks/Tasks";
 import Login from "./components/views/Login/Login";
 
 // Components
@@ -48,7 +48,7 @@ export default function App() {
                 exit="out"
                 variants={pageTransition}
               >
-                <Taks />
+                <Tasks />
               </motion.div>
             </RequiredAuth>
           }
