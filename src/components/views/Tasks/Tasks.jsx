@@ -1,6 +1,8 @@
-// Components
 import { useEffect, useState } from "react";
+
+// Components
 import Header from "../../Header/Header";
+import TaskForm from "../../TaskForm/TaskForm";
 
 // Style
 import "./tasks.css";
@@ -30,6 +32,7 @@ function Tasks () {
     <>
       <Header />
       <main id="tasks">
+        <TaskForm />
         <section className="wrapper_list">
             <div className="list_header">
               <h2>Mis tareas</h2>
