@@ -1,8 +1,14 @@
 // Library
 import { Formik, useFormik } from "formik";
+import * as Yup from "yup";
 
 // Style
 import "./task-form.css";
+
+const msg = {
+    "reduired":"Este campor obligatorio",
+    "title-min":"Tiene que contener al menos 6 caracteres"
+}
 
 function TaskForm () {
     const initialValues = {
@@ -12,13 +18,24 @@ function TaskForm () {
       description: ""
     };
 
-  
     const onSubmit = () => {
         alert()
     };
+
+    const validationSchema = Yup.object().shape({
+        title: Yup.string()
+        .required(msg["reduired"])
+        .min(6,msg["title-min"]),
+
+        status: Yup.string()
+        .required(msg["reduired"]),
+
+        priority: Yup.string()
+        .required(msg["reduired"]),
+    });
   
-    const formik = useFormik({ initialValues, onSubmit });
-    const { handleChange, handleSubmit} = formik;
+    const formik = useFormik({ initialValues, validationSchema, onSubmit });
+    const { handleChange, handleSubmit, errors} = formik;
   
     return (
         <section className="task-form">
@@ -28,6 +45,7 @@ function TaskForm () {
                 <div>
                     <input type="text" name="title" placeholder="titulo ..." onChange={handleChange} />
                 </div>
+                {errors.title && <span>{errors.title}</span>}
                 <div>
                     <select className="status" onChange={handleChange}>
                         <option value={""}>Seleccionar opción</option>
@@ -36,6 +54,7 @@ function TaskForm () {
                         <option value={"finished"}>Terminada</option>
                     </select>
                 </div>
+                {errors.status && <span>{errors.status}</span>}
                 <div>
                     <select className="priority" onChange={handleChange}>
                         <option value={""}>Seleccionar opción</option>
@@ -44,6 +63,7 @@ function TaskForm () {
                         <option value={"high"}>Alta</option>
                     </select>
                 </div>
+                {errors.priority && <span>{errors.priority}</span>}
                 <div>
                     <textarea name="description" onChange={handleChange} placeholder="Descripción ..." />
                 </div>
