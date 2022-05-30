@@ -10,9 +10,23 @@
     box-shadow: 0 2px 5px #dbdbdb;
 }
 
+
+#tasks .list{
+    flex: 1 1 1px;
+    /* border: solid 1px red; */
+}
+
+
 #tasks .wrapper_list h2 {
     font-size: 1.2rem;
     margin: 0;
+}
+
+#tasks .wrapper_list .list_group {
+    display: flex;
+    flex-direction: row;
+    gap: 5px 10px;
+    flex: 1 1 1px;
 }
 
 #tasks .card {
@@ -61,8 +75,3 @@
     color: #424242;
     display: block;
 }
-
-/* falta - no mostro todo */
-
-
-
