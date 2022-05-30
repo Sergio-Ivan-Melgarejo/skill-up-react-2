@@ -39,6 +39,8 @@
     padding: .8rem 1.1rem .9rem;
     position: relative;
     transition: transform .2s ease-out;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
 #tasks .card .close {
