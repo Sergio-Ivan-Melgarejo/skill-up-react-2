@@ -2,6 +2,7 @@
     flex: 1;
     display: flex;
     flex-direction: column;
+    max-width: 600px;
 }
 
 .task-form h2 {
@@ -17,7 +18,7 @@
 .task-form > form > div {
     display: flex;
     flex-wrap: wrap;
-    gap: .9rem;
+    /* gap: .9rem; */
     flex-direction: column;
     justify-content:space-between;
     margin-bottom: .6rem;
@@ -44,6 +45,19 @@
     box-sizing: border-box;
 }
 
+.task-form input.error,
+.task-form select.error,
+.task-form textarea.error {
+    border: solid 1px var(--global-error-color);
+    color: var(--global-error-color);
+}
+
+.error-message {
+    width: 100%;
+    font-size: .8rem;
+    color: var(--global-error-color);
+}
+
 .task-form textarea {
     min-width: 140px;
 }
@@ -58,6 +72,8 @@
     font-size: 16px;
     cursor: pointer;
     justify-content:center;
+
+    width: 100%;
 }
 
 .task-form button:hover {
