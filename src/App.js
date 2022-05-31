@@ -7,7 +7,8 @@ import "./App.css";
 
 // Views
 import Tasks from "./components/views/Tasks/Tasks";
-import Login from "./components/views/Login/Login";
+import Login from "./components/views/auth/Login/Login";
+import Register from "./components/views/auth/Register/Register";
 
 const Error404 =  lazy(() => import("./components/views/Error404/Error404"));
 
@@ -59,6 +60,20 @@ export default function App() {
               variants={pageTransition}
             >
               <Login />
+            </motion.div>
+          }
+        />
+        <Route
+          path="/register"
+          element={
+            <motion.div
+              className="page"
+              initial="out"
+              animate="in"
+              exit="out"
+              variants={pageTransition}
+            >
+              <Register />
             </motion.div>
           }
         />

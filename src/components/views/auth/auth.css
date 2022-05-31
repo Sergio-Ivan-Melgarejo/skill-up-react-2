@@ -26,9 +26,20 @@
   padding: 8px 0;
 }
 
+.auth > form > div  a {
+  text-decoration: none;
+  color: var(--global-secondary-color);
+}
+
 .auth > form > div > div {
     color: var(--global-primary-color);
     font-size: 15px;
+}
+
+.auth input,
+.auth select {
+  border-radius: var(--global-border-radius);
+  border: var(--global-border);
 }
 
 .auth button {
@@ -49,6 +60,14 @@
 .auth input {
     border-radius: var(--global-border-radius);
     border: var(--global-border);
+}
+
+
+.auth input.error,
+.auth select.error,
+.auth textarea.error {
+    border: solid 1px var(--global-error-color);
+    color: var(--global-error-color);
 }
 
 @media screen and (min-width:600px) {

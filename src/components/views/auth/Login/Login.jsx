@@ -1,9 +1,9 @@
 // Library
 import { useFormik } from "formik";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 // Style
-import "./login.css";
+import "../auth.css";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -58,6 +58,11 @@ const Login = () => {
         </div>
         <div>
           <button type="submit">Enviar</button>
+        </div>
+        <div>
+          <p>
+            <span>¿No tienes una cuenta? </span><Link to="/register">Registrarme</Link>
+          </p>
         </div>
       </form>
     </div>
