@@ -1,7 +1,11 @@
-import { useFormik } from "formik";
+import { replace, useFormik } from "formik";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
+import { v4 as uuidv4 } from "uuid";
+import { Switch, FormControlLabel } from "@mui/material";
+
+import "../auth.css";
 
 const msg = {
   reduired: "* Este campor obligatorio",
@@ -9,10 +13,11 @@ const msg = {
   email: "* Tiene que ser un email valido",
 };
 
-const apiSimulada = require("./api.json");
+const apiSimulada = require("./Api-auth.json");
 
 const Register = () => {
   const [data, setData] = useState();
+  const navigate = useNavigate();
 
   useEffect(() => {
     // fetch("./api.json")
@@ -21,16 +26,15 @@ const Register = () => {
     setData(apiSimulada.result)
   }, []);
   
-  console.log(data)
-
   const initialValues = {
     userName: "",
     password: "",
     email: "",
-    teamId: "",
+    teamID: "",
     role: "",
     continent: "",
     region: "",
+    switch:false
   };
 
   const validationSchema = Yup.object().shape({
@@ -39,18 +43,47 @@ const Register = () => {
       .min(4, msg["userName-min"]),
     password: Yup.string().required(msg["reduired"]),
     email: Yup.string().email(msg.email).required(msg["reduired"]),
-    // teamId: Yup.string().required(msg["reduired"]),
+    //teamID: Yup.string().required(msg["reduired"]),
     role: Yup.string().required(msg["reduired"]),
     continent: Yup.string().required(msg["reduired"]),
     region: Yup.string().required(msg["reduired"]),
   });
 
+  const handleChangeContinent = (value) => {
+    setFieldValue("continent",value);
+    if(value !== "America") setFieldValue("region","Otro");
+  }
+
   const onSubmit = () => {
-    alert("dfad");
+    const teamID = values.teamID || uuidv4();
+
+    fetch("./api.json",{
+      method: "POST",
+      headers: {
+        "Content-Type":"application/json"      
+      },
+      body: JSON.stringify({
+        "user": {
+            "userName": values.userName,
+            "password": values.password,
+            "email": values.email,
+            "role": values.role,
+            "continent": values.continent,
+            "region": values.region,
+            teamID
+        }
+    })
+    })
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data?.result.user?.teamID)
+      navigate(`/registered/${data?.result.user?.teamID}`,{replace:true})
+    })
+    
   };
 
   const formik = useFormik({ initialValues, validationSchema, onSubmit });
-  const { handleChange, handleSubmit, errors, touched, handleBlur, values } = formik;
+  const { handleChange, handleSubmit, errors, touched, handleBlur, values, setFieldValue } = formik;
 
   return (
     <div className="auth">
@@ -101,11 +134,32 @@ const Register = () => {
             <span className="error-message">{errors.email}</span>
           )}
         </div>
-        <input
-          value="das9d9asd-3123-4123-1231-312fas213"
-          type="hidden"
-          name="teamID"
+          <FormControlLabel 
+            control={
+              <Switch
+                value={validationSchema.switch}
+                onChange={()=>
+                  formik.setFieldValue("switch",!formik.values.switch)
+                } 
+                name="switch"
+                color="secondary"
+              />
+            }
+            label="¿Pertenecés a un equipo ya creado?"
         />
+        {
+          values.switch && (
+            <div>
+              <label htmlFor="teamID">Por favor, introduce el identificador de equipo</label>
+              <input
+                type="text"
+                name="teamID"
+                id="teamID"
+                value={values.teamID}
+              />
+            </div>
+          )
+        }
         <div>
           <label htmlFor="role">Rol</label>
           <select
@@ -128,7 +182,7 @@ const Register = () => {
         <div>
           <label htmlFor="continent">Continente</label>
           <select
-            onChange={handleChange}
+            onChange={(e) => handleChangeContinent(e.target.value)}
             onBlur={handleBlur}
             value={values.continent}
             name="continent"

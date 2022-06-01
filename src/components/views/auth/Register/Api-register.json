@@ -1,0 +1,10 @@
+{
+    "user": {
+        "userName": "sergio",
+        "password": "123456",
+        "email": "sergio.ivan.melgarejo@mail.com",
+        "role": "Team Leader",
+        "continent": "America",
+        "region": "Otro"
+    }
+}
