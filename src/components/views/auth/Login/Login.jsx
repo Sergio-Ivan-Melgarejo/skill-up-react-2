@@ -61,7 +61,8 @@ const Login = () => {
         </div>
         <div>
           <p>
-            <span>¿No tienes una cuenta? </span><Link to="/register">Registrarme</Link>
+            {/* <span>¿No tienes una cuenta? </span> */}
+            <Link to="/register">Registrarme</Link>
           </p>
         </div>
       </form>

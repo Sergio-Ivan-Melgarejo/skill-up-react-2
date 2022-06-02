@@ -1,11 +1,10 @@
 .task-form {
-    flex: 1;
+    flex: 1 1 1px;
     display: flex;
     flex-direction: column;
-    max-width: 600px;
     margin: 0 auto;
+    max-width: 600px;
     width: 100%;
-    margin-bottom: 3em;
 }
 
 .task-form h2 {
@@ -14,7 +13,6 @@
 
 .task-form > form {
     width: 100%;
-    padding-right: 15px;
     box-sizing: border-box;
 }
 
@@ -63,24 +61,30 @@
 
 .task-form textarea {
     min-width: 140px;
+    min-height: 140px;
+    width: 100%;
+    resize: none;
 }
 
 .task-form button {
     transform: all .3s ease-out;
     background-color: var(--global-primary-color);
     border-radius: var(--global-border-radius);
-    border: 0;
+    border: 1px solid transparent;
     color: var(--global-bg-color-soft);
     padding: 10px !important;
     font-size: 16px;
     cursor: pointer;
     justify-content:center;
 
+    font-weight: 700;
     width: 100%;
 }
 
 .task-form button:hover {
-    background-color: var(--global-secondary-color);
+    border: 1px solid var(--global-primary-color);
+    background-color: transparent;
+    color: var(--global-primary-color);
 }
 
 @media (min-width:1300px) {

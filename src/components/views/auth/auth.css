@@ -46,15 +46,18 @@
     transition: all .3s ease-out;
     background-color: var(--global-primary-color);
     border-radius: var(--global-border-radius);
-    border: 0;
+    border: 1px solid transparent;
     color: var(--global-bg-color-soft);
     padding: 10px !important;
     font-size: 16px;
     cursor: pointer;
+    font-weight: 700;
 }
 
 .auth button:hover {
-    background-color: var(--global-secondary-color);
+  border: 1px solid var(--global-primary-color);
+  background-color: transparent;
+  color: var(--global-primary-color);
 }
 
 .auth input {

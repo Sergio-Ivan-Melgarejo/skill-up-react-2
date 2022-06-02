@@ -79,7 +79,7 @@ export default function App() {
           }
         />
         <Route
-          path="/registered:teamID"
+          path="/registered/:teamID"
           element={
             <motion.div
               className="page"

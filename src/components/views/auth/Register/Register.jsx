@@ -13,17 +13,19 @@ const msg = {
   email: "* Tiene que ser un email valido",
 };
 
-const apiSimulada = require("./Api-auth.json");
+const url = "https://goscrum-api.alkemy.org/auth/data";
 
 const Register = () => {
   const [data, setData] = useState();
   const navigate = useNavigate();
 
   useEffect(() => {
-    // fetch("./api.json")
-    // .then((res) => res.json())
-    // .then((data) => setData(data))
-    setData(apiSimulada.result)
+    fetch(url)
+    .then((res) => res.json())
+    .then((data) => {
+      // console.log(data);
+      setData(data.result);
+    })
   }, []);
   
   const initialValues = {
@@ -56,8 +58,8 @@ const Register = () => {
 
   const onSubmit = () => {
     const teamID = values.teamID || uuidv4();
-
-    fetch("./api.json",{
+console.log("1")
+    fetch("https://goscrum-api.alkemy.org/auth/register",{
       method: "POST",
       headers: {
         "Content-Type":"application/json"      
@@ -76,8 +78,9 @@ const Register = () => {
     })
     .then((res) => res.json())
     .then((data) => {
-      console.log(data?.result.user?.teamID)
-      navigate(`/registered/${data?.result.user?.teamID}`,{replace:true})
+      console.log("2")
+      console.log(data)
+      navigate(`/registered/${data?.result?.user?.teamID}`,{replace:true})
     })
     
   };
@@ -172,7 +175,7 @@ const Register = () => {
           >
             <option value="">Seleccionar Rol</option>
             {
-              data?.role?.map(ele => <option key={ele} value={ele}>{ele}</option>)
+              data?.Rol?.map(ele => <option key={ele} value={ele}>{ele}</option>)
             }
           </select>
           {errors.role && touched.role && (
@@ -191,7 +194,7 @@ const Register = () => {
           >
             <option value="">Seleccionar Continente</option>
             {
-              data?.continent?.map(ele => <option key={ele} value={ele}>{ele}</option>)
+              data?.continente?.map(ele => <option key={ele} value={ele}>{ele}</option>)
             }
           </select>
           {errors.continent && touched.continent && (
@@ -212,7 +215,7 @@ const Register = () => {
                   >
                     <option value="">Seleccionar Región</option>
                     { 
-                      data?.region?.map(ele => <option key={ele} value={ele}>{ele}</option>)
+                      data?.region.sort()?.map(ele => <option key={ele} value={ele}>{ele}</option>)
                     }
                   </select>
                   {errors.region && touched.region && (
@@ -226,7 +229,7 @@ const Register = () => {
         </div>
         <div>
           <p>
-            <span>¿Y tienes una cuenta? </span>
+            {/* <span>¿Y tienes una cuenta? </span> */}
             <Link to="/login">Iniciar sesión</Link>
           </p>
         </div>
