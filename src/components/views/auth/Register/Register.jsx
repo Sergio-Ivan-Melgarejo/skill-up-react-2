@@ -7,7 +7,7 @@ import { Switch, FormControlLabel } from "@mui/material";
 
 import "../auth.css";
 
-const { REACT_APP_API_ENPOINT } = process.env;
+const { REACT_APP_API_ENPOINT : API_ENPOINT } = process.env;
 
 const msg = {
   reduired: "* Este campor obligatorio",
@@ -20,7 +20,7 @@ const Register = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`${REACT_APP_API_ENPOINT}auth/data`)
+    fetch(`${API_ENPOINT}auth/data`)
       .then((res) => res.json())
       .then((data) => {
         // console.log(data);
@@ -59,7 +59,7 @@ const Register = () => {
   const onSubmit = () => {
     const teamID = values.teamID || uuidv4();
 
-    fetch(`${REACT_APP_API_ENPOINT}auth/register`, {
+    fetch(`${API_ENPOINT}auth/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
