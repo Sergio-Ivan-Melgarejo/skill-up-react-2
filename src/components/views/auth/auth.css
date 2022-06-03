@@ -31,6 +31,11 @@
   color: var(--global-secondary-color);
 }
 
+.auth > form > div > input,
+.auth > form > div > select {
+  padding: 8px;
+}
+
 .auth > form > div > div {
     color: var(--global-primary-color);
     font-size: 15px;
@@ -64,7 +69,6 @@
     border-radius: var(--global-border-radius);
     border: var(--global-border);
 }
-
 
 .auth input.error,
 .auth select.error,

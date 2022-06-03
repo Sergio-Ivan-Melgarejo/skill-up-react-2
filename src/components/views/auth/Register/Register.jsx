@@ -7,7 +7,7 @@ import { Switch, FormControlLabel } from "@mui/material";
 
 import "../auth.css";
 
-const { REACT_APP_API_ENPOINT } = process.env
+const { REACT_APP_API_ENPOINT } = process.env;
 
 const msg = {
   reduired: "* Este campor obligatorio",
@@ -21,13 +21,13 @@ const Register = () => {
 
   useEffect(() => {
     fetch(`${REACT_APP_API_ENPOINT}auth/data`)
-    .then((res) => res.json())
-    .then((data) => {
-      // console.log(data);
-      setData(data.result);
-    })
+      .then((res) => res.json())
+      .then((data) => {
+        // console.log(data);
+        setData(data.result);
+      });
   }, []);
-  
+
   const initialValues = {
     userName: "",
     password: "",
@@ -36,7 +36,7 @@ const Register = () => {
     role: "",
     continent: "",
     region: "",
-    switch:false
+    switch: false,
   };
 
   const validationSchema = Yup.object().shape({
@@ -52,39 +52,48 @@ const Register = () => {
   });
 
   const handleChangeContinent = (value) => {
-    setFieldValue("continent",value);
-    if(value !== "America") setFieldValue("region","Otro");
-  }
+    setFieldValue("continent", value);
+    if (value !== "America") setFieldValue("region", "Otro");
+  };
 
   const onSubmit = () => {
-    
     const teamID = values.teamID || uuidv4();
 
-    fetch(`${REACT_APP_API_ENPOINT}auth/register`,{
+    fetch(`${REACT_APP_API_ENPOINT}auth/register`, {
       method: "POST",
       headers: {
-        "Content-Type":"application/json"      
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        "user": {
-            "userName": values.userName,
-            "password": values.password,
-            "email": values.email,
-            "role": values.role,
-            "continent": values.continent,
-            "region": values.region,
-            teamID
-        }
+        user: {
+          userName: values.userName,
+          password: values.password,
+          email: values.email,
+          role: values.role,
+          continent: values.continent,
+          region: values.region,
+          teamID,
+        },
+      }),
     })
-    })
-    .then((res) => res.json())
-    .then((data) => {
-      navigate(`/registered/${data?.result?.user?.teamID}`,{replace:true})
-    })
+      .then((res) => res.json())
+      .then((data) => {
+        navigate(`/registered/${data?.result?.user?.teamID}`, {
+          replace: true,
+        });
+      });
   };
 
   const formik = useFormik({ initialValues, validationSchema, onSubmit });
-  const { handleChange, handleSubmit, errors, touched, handleBlur, values, setFieldValue } = formik;
+  const {
+    handleChange,
+    handleSubmit,
+    errors,
+    touched,
+    handleBlur,
+    values,
+    setFieldValue,
+  } = formik;
 
   return (
     <div className="auth">
@@ -135,32 +144,32 @@ const Register = () => {
             <span className="error-message">{errors.email}</span>
           )}
         </div>
-          <FormControlLabel 
-            control={
-              <Switch
-                value={validationSchema.switch}
-                onChange={()=>
-                  formik.setFieldValue("switch",!formik.values.switch)
-                } 
-                name="switch"
-                color="secondary"
-              />
-            }
-            label="¿Pertenecés a un equipo ya creado?"
+        <FormControlLabel
+          control={
+            <Switch
+              value={validationSchema.switch}
+              onChange={() =>
+                formik.setFieldValue("switch", !formik.values.switch)
+              }
+              name="switch"
+              color="secondary"
+            />
+          }
+          label="¿Pertenecés a un equipo ya creado?"
         />
-        {
-          values.switch && (
-            <div>
-              <label htmlFor="teamID">Por favor, introduce el identificador de equipo</label>
-              <input
-                type="text"
-                name="teamID"
-                id="teamID"
-                value={values.teamID}
-              />
-            </div>
-          )
-        }
+        {values.switch && (
+          <div>
+            <label htmlFor="teamID">
+              Por favor, introduce el identificador de equipo
+            </label>
+            <input
+              type="text"
+              name="teamID"
+              id="teamID"
+              value={values.teamID}
+            />
+          </div>
+        )}
         <div>
           <label htmlFor="role">Rol</label>
           <select
@@ -172,9 +181,11 @@ const Register = () => {
             className={errors.role && touched.role ? "error" : ""}
           >
             <option value="">Seleccionar Rol</option>
-            {
-              data?.Rol?.map(ele => <option key={ele} value={ele}>{ele}</option>)
-            }
+            {data?.Rol?.map((ele) => (
+              <option key={ele} value={ele}>
+                {ele}
+              </option>
+            ))}
           </select>
           {errors.role && touched.role && (
             <span className="error-message">{errors.role}</span>
@@ -191,37 +202,39 @@ const Register = () => {
             className={errors.continent && touched.continent ? "error" : ""}
           >
             <option value="">Seleccionar Continente</option>
-            {
-              data?.continente?.map(ele => <option key={ele} value={ele}>{ele}</option>)
-            }
+            {data?.continente?.map((ele) => (
+              <option key={ele} value={ele}>
+                {ele}
+              </option>
+            ))}
           </select>
           {errors.continent && touched.continent && (
             <span className="error-message">{errors.continent}</span>
           )}
         </div>
-          {   
-              values.continent === "America"     
-              ?  <div>
-                  <label htmlFor="region">Región</label>
-                  <select
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.region}
-                    name="region"
-                    id="region"
-                    className={errors.region && touched.region ? "error" : ""}
-                  >
-                    <option value="">Seleccionar Región</option>
-                    { 
-                      data?.region.sort()?.map(ele => <option key={ele} value={ele}>{ele}</option>)
-                    }
-                  </select>
-                  {errors.region && touched.region && (
-                    <span className="error-message">{errors.region}</span>
-                  )}
-                </div>
-              :  null
-          }
+        {values.continent === "America" ? (
+          <div>
+            <label htmlFor="region">Región</label>
+            <select
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.region}
+              name="region"
+              id="region"
+              className={errors.region && touched.region ? "error" : ""}
+            >
+              <option value="">Seleccionar Región</option>
+              {data?.region.sort()?.map((ele) => (
+                <option key={ele} value={ele}>
+                  {ele}
+                </option>
+              ))}
+            </select>
+            {errors.region && touched.region && (
+              <span className="error-message">{errors.region}</span>
+            )}
+          </div>
+        ) : null}
         <div>
           <button type="submit">Enviar</button>
         </div>
