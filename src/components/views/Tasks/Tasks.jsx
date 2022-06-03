@@ -7,6 +7,13 @@ import TaskForm from "../../TaskForm/TaskForm";
 // Style
 import "./tasks.css";
 
+const limitString = (str) => {
+  if(str.length > 300){ 
+    return { string: str.slice(0,300).concat("..."), addButton: true };
+  }
+  return { string:str, addButton: false }
+}
+
 function Tasks () {
   const [isPhone, setIsPhone] = useState(window.innerWidth < 900 ? true : false);
   
@@ -20,13 +27,6 @@ function Tasks () {
     window.addEventListener("resize",handleResize);
     return () => window.removeEventListener("resize",handleResize);
   }, []);
-
-  const limitString = (str) => {
-    if(str.length > 300){ 
-      return { string: str.slice(0,300).concat("..."), addButton: true };
-    }
-    return { string:str, addButton: false }
-  }
 
   return (
     <>

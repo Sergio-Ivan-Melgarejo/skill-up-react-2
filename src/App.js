@@ -7,17 +7,14 @@ import "./App.css";
 
 // Views
 import Tasks from "./components/views/Tasks/Tasks";
-import Login from "./components/views/Login/Login";
-
-// Components
-
-
+import Login from "./components/views/auth/Login/Login";
+import Register from "./components/views/auth/Register/Register";
+import Registered from "./components/views/Registered/Registered";
 
 const Error404 =  lazy(() => import("./components/views/Error404/Error404"));
 
 function RequiredAuth({ children }) {
-  if (!localStorage.getItem("logged")) {
-    console.log("das");
+  if (!localStorage.getItem("token")) {
     return <Navigate to="/login" replace={true} />;
   }
   return children;
@@ -64,6 +61,34 @@ export default function App() {
               variants={pageTransition}
             >
               <Login />
+            </motion.div>
+          }
+        />
+        <Route
+          path="/register"
+          element={
+            <motion.div
+              className="page"
+              initial="out"
+              animate="in"
+              exit="out"
+              variants={pageTransition}
+            >
+              <Register />
+            </motion.div>
+          }
+        />
+        <Route
+          path="/registered/:teamID"
+          element={
+            <motion.div
+              className="page"
+              initial="out"
+              animate="in"
+              exit="out"
+              variants={pageTransition}
+            >
+              <Registered />
             </motion.div>
           }
         />
