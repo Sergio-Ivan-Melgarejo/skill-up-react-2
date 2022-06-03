@@ -13,6 +13,7 @@
 
 .task-form > form {
     width: 100%;
+    // padding-right: 15px;
     box-sizing: border-box;
 }
 
@@ -76,7 +77,6 @@
     font-size: 16px;
     cursor: pointer;
     justify-content:center;
-
     font-weight: 700;
     width: 100%;
 }
