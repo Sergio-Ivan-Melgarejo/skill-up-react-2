@@ -39,7 +39,6 @@ function TaskForm() {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        alert("tarea echa");
         resetForm();
       });
   };
