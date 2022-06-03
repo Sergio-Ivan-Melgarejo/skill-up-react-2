@@ -26,29 +26,55 @@
   padding: 8px 0;
 }
 
+.auth > form > div  a {
+  text-decoration: none;
+  color: var(--global-secondary-color);
+}
+
+.auth > form > div > input,
+.auth > form > div > select {
+  padding: 8px;
+}
+
 .auth > form > div > div {
     color: var(--global-primary-color);
     font-size: 15px;
+}
+
+.auth input,
+.auth select {
+  border-radius: var(--global-border-radius);
+  border: var(--global-border);
 }
 
 .auth button {
     transition: all .3s ease-out;
     background-color: var(--global-primary-color);
     border-radius: var(--global-border-radius);
-    border: 0;
+    border: 1px solid transparent;
     color: var(--global-bg-color-soft);
     padding: 10px !important;
     font-size: 16px;
     cursor: pointer;
+    font-weight: 700;
 }
 
 .auth button:hover {
-    background-color: var(--global-secondary-color);
+  border: 1px solid var(--global-primary-color);
+  background-color: transparent;
+  color: var(--global-primary-color);
 }
 
 .auth input {
     border-radius: var(--global-border-radius);
     border: var(--global-border);
+}
+
+.auth input.error,
+.auth select.error,
+.auth textarea.error {
+    border: solid 1px var(--global-error-color);
+    color: var(--global-error-color);
 }
 
 @media screen and (min-width:600px) {
