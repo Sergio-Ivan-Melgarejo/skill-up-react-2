@@ -1,6 +1,8 @@
 // Library
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // Style
 import "./task-form.css";
@@ -40,6 +42,7 @@ function TaskForm() {
       .then((data) => {
         console.log(data);
         resetForm();
+        toast("Tarea creada");
       });
   };
 
@@ -124,8 +127,9 @@ function TaskForm() {
           )}
         </div>
 
-        <button type="submit">Crear</button>
+        <button className="btn" type="submit">Crear</button>
       </form>
+      <ToastContainer />
     </section>
   );
 }

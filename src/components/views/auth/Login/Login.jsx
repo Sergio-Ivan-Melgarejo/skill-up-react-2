@@ -6,6 +6,9 @@ import * as Yup from "yup";
 // Style
 import "../auth.css";
 
+// utils
+import swalAlert from "../../../../utils/swalAlert";
+
 const { REACT_APP_API_ENPOINT : API_ENPOINT } = process.env;
 
 const msg = {
@@ -14,13 +17,14 @@ const msg = {
   userName: "* Tiene que ser un nombre valido",
 };
 
+const initialValues = {
+  userName: "",
+  password: "",
+};
+
 const Login = () => {
   const navigate = useNavigate();
 
-  const initialValues = {
-    userName: "",
-    password: "",
-  };
 
   const validationSchema = Yup.object().shape({
     userName: Yup.string()
@@ -46,9 +50,15 @@ const Login = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        // console.log(data)
-        localStorage.setItem("token", data?.result?.token);
-        navigate("/", { replace: true });
+        if(data.status_code >= 200 && data.status_code < 300) {
+          localStorage.setItem("token", data?.result?.token);
+          navigate("/", { replace: true });
+        } else {
+          swalAlert({
+            title: 'Credenciales invalidas',
+            text: `El servidor respondió "${data.message}", por favor introduce credenciales válidas.`
+          })
+        }
       });
   };
 
