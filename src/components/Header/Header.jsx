@@ -7,13 +7,17 @@ const Header = () => {
   
   const handleLogOut = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("userName");
     navigate("/login",{replace:true});
   }
   
   return (
     <header>
       <img src={img} alt="Go Scrum" />
-      <div onClick={handleLogOut}>x</div>
+      <div className="wrapper_right_header">
+        <div>{localStorage.getItem("userName")}</div>
+        <div className="close" onClick={handleLogOut}>x</div>
+      </div>
     </header>
   );
 };
