@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import debounce from "lodash.debounce";
 
 // Components
 import Header from "../../Header/Header";
@@ -33,11 +34,12 @@ function Tasks() {
   const [list, setList] = useState(null);
   const [tasksFromWho, setTasksFromWho] = useState("ALL");
   const [renderList, setRenderList] = useState(null);
+
   const [loading, setloading] = useState(false);
 
   useEffect(() => {
     setloading(true);
-    fetch(`${API_ENPOINT}task${tasksFromWho === "ME" ? "/me" : null}`, {
+    fetch(`${API_ENPOINT}task${tasksFromWho === "ME" ? "/me" : ""}`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: "Bearer " + localStorage.getItem("token"),
@@ -45,7 +47,6 @@ function Tasks() {
     })
       .then((res) => res.json())
       .then((data) => {
-        // console.log(data);
         if (data.status_code < 300 && data.status_code >= 200) {
           setList(data.result);
           setRenderList(data.result);
@@ -83,6 +84,22 @@ function Tasks() {
       );
   };
 
+// para filtrar por busqueda
+  const [search, setSearch] = useState("");
+
+  useEffect(() => {
+   if (search) {
+    setRenderList(
+      list.filter((data) => data.title.toLowerCase().startsWith(search.toLowerCase()))
+    );   
+  } 
+  else setRenderList(list)
+  }, [search]);
+
+  const handleSearch = debounce((e) => {
+    setSearch(e?.target?.value);
+  }, 1000);
+
   return (
     <>
       <Header />
@@ -115,9 +132,9 @@ function Tasks() {
               <input
                 type="text"
                 placeholder="Buscar por título..."
-                // onChange={handleSearch}
+                onChange={handleSearch}
               />
-            </div> 
+            </div>
             <select name="importance" onChange={handleChangeImportance}>
               <option value="">Seleccionar una prioridad</option>
               <option value="ALL">Todas</option>

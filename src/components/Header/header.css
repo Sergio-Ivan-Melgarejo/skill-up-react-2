@@ -19,6 +19,8 @@ header > div > .close{
     cursor: pointer;
     padding: 2px 8px;
     border-radius: 50%;
+    font-weight: bolder;
+    transform: translateY(-1px);
 }
 
 .wrapper_right_header{
