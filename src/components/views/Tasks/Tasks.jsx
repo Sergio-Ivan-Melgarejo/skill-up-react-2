@@ -6,7 +6,7 @@ import debounce from "lodash.debounce";
 // Components
 import Header from "../../Header/Header";
 import TaskForm from "../../TaskForm/TaskForm";
-import { Card } from "../../Card/Card";
+import Card from "../../Card/Card";
 import {
   Radio,
   RadioGroup,
@@ -21,13 +21,6 @@ import { useResize } from "../../../hooks/useResize";
 import "./tasks.css";
 
 const { REACT_APP_API_ENPOINT: API_ENPOINT } = process.env;
-
-const limitString = (str) => {
-  if (str.length > 300) {
-    return { string: str.slice(0, 300).concat("..."), addButton: true };
-  }
-  return { string: str, addButton: false };
-};
 
 function Tasks() {
   const { isPhone } = useResize();
@@ -60,19 +53,10 @@ function Tasks() {
   const renderAllCards = () => {
     return renderList?.map((data) => <Card key={data._id} data={data} />);
   };
-  const renderNewCards = () => {
+  
+  const renderColumnCards = (text) => {
     return renderList
-      ?.filter((ele) => ele.status === "NEW")
-      .map((data) => <Card key={data._id} data={data} />);
-  };
-  const renderInProgressCards = () => {
-    return renderList
-      ?.filter((ele) => ele.status === "IN PROGRESS")
-      .map((data) => <Card key={data._id} data={data} />);
-  };
-  const renderFinishedCards = () => {
-    return renderList
-      ?.filter((ele) => ele.status === "FINISHED")
+      ?.filter((ele) => ele.status === text)
       .map((data) => <Card key={data._id} data={data} />);
   };
 
@@ -169,15 +153,15 @@ function Tasks() {
                 <>
                   <div className="list">
                     <h4>Nuevas</h4>
-                    {renderNewCards()}
+                    {renderColumnCards("NEW")}
                   </div>
                   <div className="list">
                     <h4>En Proceso</h4>
-                    {renderInProgressCards()}
+                    {renderColumnCards("IN PROGRESS")}
                   </div>
                   <div className="list">
                     <h4>Finalizadas</h4>
-                    {renderFinishedCards()}
+                    {renderColumnCards("FINISHED")}
                   </div>
                 </>
               )}

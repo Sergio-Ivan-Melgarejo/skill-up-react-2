@@ -52,6 +52,39 @@
     color: var(--global-bg-color-soft);
 }
 
+#tasks .card button.finished {
+    background-color: #1ec876;
+    border-color: #1ec876;
+ }
+ 
+ #tasks .card button.finished:hover {
+    background-color: white;
+    color: #1ec876;
+ }
+ 
+ #tasks .card button.low {
+    background-color: #007bff;
+    border-color: #007bff;
+ }
+ 
+ #tasks .card button.low:hover {
+    background-color: white;
+    color: #007bff;
+ }
+ 
+ #tasks .card button.medium,
+ #tasks .card button.progress {
+    background-color: #fbde3f;
+    border-color: #fbde3f;
+    color: black;
+ }
+ 
+ #tasks .card button.medium:hover,
+ #tasks .card button.progress:hover {
+    background-color: black;
+    color: #fbde3f;
+ }
+
 #tasks .card p {
     color: #424242;
     display: block;

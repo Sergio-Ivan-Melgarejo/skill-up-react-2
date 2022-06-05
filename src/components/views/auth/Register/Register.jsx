@@ -167,6 +167,7 @@ const Register = () => {
               name="teamID"
               id="teamID"
               value={values.teamID}
+              onChange={handleChange}
             />
           </div>
         )}

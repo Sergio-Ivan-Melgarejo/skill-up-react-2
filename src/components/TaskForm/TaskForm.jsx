@@ -87,7 +87,7 @@ function TaskForm() {
           >
             <option value="">Seleccionar opción</option>
             <option value="NEW">Nueva</option>
-            <option value="INPROGRESS">En proceso</option>
+            <option value="IN PROGRESS">En proceso</option>
             <option value="FINISHED">Terminada</option>
           </select>
           {errors.status && touched.status && (
