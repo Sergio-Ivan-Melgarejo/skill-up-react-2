@@ -1,6 +1,8 @@
 // Library
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // Style
 import "./task-form.css";
@@ -40,6 +42,7 @@ function TaskForm() {
       .then((data) => {
         console.log(data);
         resetForm();
+        toast("Tarea creada");
       });
   };
 
@@ -84,7 +87,7 @@ function TaskForm() {
           >
             <option value="">Seleccionar opción</option>
             <option value="NEW">Nueva</option>
-            <option value="INPROGRESS">En proceso</option>
+            <option value="IN PROGRESS">En proceso</option>
             <option value="FINISHED">Terminada</option>
           </select>
           {errors.status && touched.status && (
@@ -124,8 +127,9 @@ function TaskForm() {
           )}
         </div>
 
-        <button type="submit">Crear</button>
+        <button className="btn" type="submit">Crear</button>
       </form>
+      <ToastContainer />
     </section>
   );
 }

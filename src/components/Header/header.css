@@ -12,5 +12,19 @@ header > img {
 }
 
 header > div {
+    color: var(--global-primary-color);
+}
+
+header > div > .close{
     cursor: pointer;
+    padding: 2px 8px;
+    border-radius: 50%;
+    font-weight: bolder;
+    transform: translateY(-1px);
+}
+
+.wrapper_right_header{
+    display: flex;
+    gap: 1em;
+    align-items: center;
 }
