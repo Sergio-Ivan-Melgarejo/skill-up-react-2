@@ -7,7 +7,7 @@ import { Switch, FormControlLabel } from "@mui/material";
 
 import "../auth.css";
 
-const { REACT_APP_API_ENPOINT : API_ENPOINT } = process.env;
+const { REACT_APP_API_ENDPOINT : API_ENPOINT } = process.env;
 
 const msg = {
   reduired: "* Este campor obligatorio",

@@ -9,7 +9,7 @@ import "../auth.css";
 // utils
 import swalAlert from "../../../../utils/swalAlert";
 
-const { REACT_APP_API_ENPOINT : API_ENPOINT } = process.env;
+const {REACT_APP_API_ENDPOINT : API_ENPOINT } = process.env;
 
 const msg = {
   reduired: "* Este campor obligatorio",

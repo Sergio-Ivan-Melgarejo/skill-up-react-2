@@ -1,30 +1,36 @@
-import { TASKS_SUCCESS, TASKS_REQUEST, TASKS_FAILURE } from "../types";
+import { TASKS_REQUEST, TASKS_SUCCESS, TASKS_FAILURE } from "../types"
 
 const initialState = {
     loading: false,
     tasks: [],
-    error:""
+    error: ""
 }
 
 export const tasksReducer = (state = initialState, action) => {
     switch (action.type) {
-        case TASKS_REQUEST:
+        case TASKS_REQUEST: {
             return {
                 ...state,
-                loading: true
+                loading: true,
             }
-        case TASKS_SUCCESS:
-            return {
-                ...state,
-                tasks: action.peyload
-            }
-        case TASKS_FAILURE:
+        }
+        case TASKS_SUCCESS: {
             return {
                 loading: false,
-                error: action.peyload,
-                tasks: []
+                error: "",
+                tasks: action.payload,
             }
+        }
+        case TASKS_FAILURE: {
+            return {
+                loading: false,
+                error: action.payload,
+                tasks: [],
+            }
+        }
         default:
             return state
     }
 }
+
+
