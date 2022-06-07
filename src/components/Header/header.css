@@ -21,10 +21,31 @@ header > div > .close{
     border-radius: 50%;
     font-weight: bolder;
     transform: translateY(-1px);
+    padding: 2px 9px 4px;
+    border-radius: var(--global-border-radius);
+    border: 1px solid transparent;
+    transition: all .3s ease-in-out;
+    font-weight: bolder;
+}
+
+header > div > .close:hover {
+    background-color: #00000010;
+    border: 1px solid var(--global-primary-color);
+    color: var(--global-primary-color);
 }
 
 .wrapper_right_header{
     display: flex;
     gap: 1em;
     align-items: center;
+}
+
+header > div > .back{
+    display: none;
+}
+
+@media screen and (min-width:600px) {
+    header > div > .back{
+        display: block
+    }
 }
