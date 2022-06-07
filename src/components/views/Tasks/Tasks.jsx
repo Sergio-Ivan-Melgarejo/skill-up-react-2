@@ -14,52 +14,39 @@ import {
   FormControlLabel,
 } from "@mui/material";
 
+// Redux
+import { useSelector, useDispatch } from "react-redux";
+import { 
+  getTasks,
+  deleteTask,
+  editTaskStatus
+} from "../../../store/actions/tasksActions";
+
 // Hooks
 import { useResize } from "../../../hooks/useResize";
 
 // Style
 import "./tasks.css";
 
-const { REACT_APP_API_ENPOINT: API_ENPOINT } = process.env;
 
 function Tasks() {
   const { isPhone } = useResize();
   const [list, setList] = useState(null);
   const [tasksFromWho, setTasksFromWho] = useState("ALL");
   const [renderList, setRenderList] = useState(null);
-
-  const [loading, setloading] = useState(false);
-
-  useEffect(() => {
-    setloading(true);
-    fetch(`${API_ENPOINT}task${tasksFromWho === "ME" ? "/me" : ""}`, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("token"),
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.status_code < 300 && data.status_code >= 200) {
-          setList(data.result);
-          setRenderList(data.result);
-        }
-        setTimeout(() => {
-          setloading(false);
-        }, 1000);
-      });
-  }, [tasksFromWho]);
-
+  
+  
+  // para renderizar los items
   const renderAllCards = () => {
-    return renderList?.map((data) => <Card key={data._id} data={data} />);
+    return renderList?.map((data) => <Card key={data._id} data={data} deleteCard={handleDelete} editCardStatus={handleEditCardStatus} />);
   };
   
   const renderColumnCards = (text) => {
     return renderList
       ?.filter((ele) => ele.status === text)
-      .map((data) => <Card key={data._id} data={data} />);
+      .map((data) => <Card key={data._id} data={data} deleteCard={handleDelete} editCardStatus={handleEditCardStatus} />);
   };
-
+ 
   const handleChangeImportance = (event) => {
     if (event.currentTarget.value === "ALL") setRenderList(list);
     else
@@ -68,7 +55,10 @@ function Tasks() {
       );
   };
 
-// para filtrar por busqueda
+  const handleDelete = (id) => dispatch(deleteTask(id))
+  const handleEditCardStatus = (data) => dispatch(editTaskStatus(data))
+
+  // para filtrar por busqueda
   const [search, setSearch] = useState("");
 
   useEffect(() => {
@@ -83,6 +73,25 @@ function Tasks() {
   const handleSearch = debounce((e) => {
     setSearch(e?.target?.value);
   }, 1000);
+
+
+  // para manejar la data por redux
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getTasks(tasksFromWho === "ME" ? "me" : ""));
+  }, [tasksFromWho, dispatch]);
+
+  const { tasks, error, loading } = useSelector((state) => state.tasksReducer);
+
+  useEffect(() => {
+    if (tasks?.length){
+      setList(tasks)
+      setRenderList(tasks)
+    }
+  }, [tasks]);
+
+  if (error) return <div>Hay un error</div>
 
   return (
     <>
@@ -120,7 +129,6 @@ function Tasks() {
               />
             </div>
             <select name="importance" onChange={handleChangeImportance}>
-              <option value="">Seleccionar una prioridad</option>
               <option value="ALL">Todas</option>
               <option value="LOW">Baja</option>
               <option value="MEDIUM">Media</option>
