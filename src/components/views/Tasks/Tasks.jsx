@@ -18,7 +18,8 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import { 
   getTasks,
-  deleteTask
+  deleteTask,
+  editTaskStatus
 } from "../../../store/actions/tasksActions";
 
 // Hooks
@@ -37,13 +38,13 @@ function Tasks() {
   
   // para renderizar los items
   const renderAllCards = () => {
-    return renderList?.map((data) => <Card key={data._id} data={data} deleteCard={handleDelete} />);
+    return renderList?.map((data) => <Card key={data._id} data={data} deleteCard={handleDelete} editCardStatus={handleEditCardStatus} />);
   };
   
   const renderColumnCards = (text) => {
     return renderList
       ?.filter((ele) => ele.status === text)
-      .map((data) => <Card key={data._id} data={data} deleteCard={handleDelete} />);
+      .map((data) => <Card key={data._id} data={data} deleteCard={handleDelete} editCardStatus={handleEditCardStatus} />);
   };
  
   const handleChangeImportance = (event) => {
@@ -55,7 +56,7 @@ function Tasks() {
   };
 
   const handleDelete = (id) => dispatch(deleteTask(id))
-
+  const handleEditCardStatus = (data) => dispatch(editTaskStatus(data))
 
   // para filtrar por busqueda
   const [search, setSearch] = useState("");

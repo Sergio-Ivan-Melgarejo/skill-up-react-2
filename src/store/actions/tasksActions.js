@@ -41,3 +41,31 @@ export const deleteTask = (id) => (dispatch) => {
     .then(() => dispatch(getTasks("")))
     .catch((error) => dispatch(tasksFailure(error)));
 };
+
+export const editTaskStatus = (data) => (dispatch) => {
+  const status = {
+    "NEW":"IN PROGRESS",
+    "IN PROGRESS":"FINISHED",
+    "FINISHED":"NEW"
+  }
+
+  dispatch(tasksRequest());
+  fetch(`${API_ENDPOINT}task/${data._id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + localStorage.getItem("token"),
+    },
+    body: JSON.stringify({
+      "task": {
+        "title": data.title,
+        "importance": data.importance,
+        "status": status[data.status],
+        "description": data.description
+      }
+    })
+  })
+    .then((res) => res.json())
+    .then(() => dispatch(getTasks("")))
+    .catch((error) => dispatch(tasksFailure(error)));
+};

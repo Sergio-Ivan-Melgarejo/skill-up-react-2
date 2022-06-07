@@ -10,6 +10,7 @@ const limitString = (str) => {
 
 function Card({
   deleteCard,
+  editCardStatus,
   data: {
     _id,
     title,
@@ -19,6 +20,7 @@ function Card({
     importance,
     user: { userName },
   },
+  data
 }) {
   const [showMore, setShowMore] = useState(false);
   const dataTime = new Date(createdAt).toLocaleString() + " hr.";
@@ -28,7 +30,7 @@ function Card({
       <h3>{title}</h3>
       <h6>{dataTime}</h6>
       <h5>{userName}</h5>
-      <button className={status.toLowerCase()} type="button">
+      <button onClick={() => editCardStatus(data)} className={status.toLowerCase()} type="button">
         {status.toLowerCase()}
       </button>
       <button className={importance.toLowerCase()} type="button">
