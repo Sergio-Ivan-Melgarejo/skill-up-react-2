@@ -27,3 +27,17 @@ export const getTasks = (path) => (dispatch) => {
     .then((data) => dispatch(tasksSuccess(data.result)))
     .catch((error) => dispatch(tasksFailure(error)));
 };
+
+export const deleteTask = (id) => (dispatch) => {
+  dispatch(tasksRequest());
+  fetch(`${API_ENDPOINT}task/${id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + localStorage.getItem("token"),
+    },
+  })
+    .then((res) => res.json())
+    .then(() => dispatch(getTasks("")))
+    .catch((error) => dispatch(tasksFailure(error)));
+};

@@ -9,7 +9,9 @@ const limitString = (str) => {
 };
 
 function Card({
+  deleteCard,
   data: {
+    _id,
     title,
     createdAt,
     description,
@@ -22,7 +24,7 @@ function Card({
   const dataTime = new Date(createdAt).toLocaleString() + " hr.";
   return (
     <div className="card">
-      <div className="close">x</div>
+      <div className="close" onClick={() => deleteCard(_id)}>x</div>
       <h3>{title}</h3>
       <h6>{dataTime}</h6>
       <h5>{userName}</h5>

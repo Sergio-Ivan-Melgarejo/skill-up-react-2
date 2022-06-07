@@ -16,7 +16,10 @@ import {
 
 // Redux
 import { useSelector, useDispatch } from "react-redux";
-import { getTasks } from "../../../store/actions/tasksActions";
+import { 
+  getTasks,
+  deleteTask
+} from "../../../store/actions/tasksActions";
 
 // Hooks
 import { useResize } from "../../../hooks/useResize";
@@ -34,15 +37,15 @@ function Tasks() {
   
   // para renderizar los items
   const renderAllCards = () => {
-    return renderList?.map((data) => <Card key={data._id} data={data} />);
+    return renderList?.map((data) => <Card key={data._id} data={data} deleteCard={handleDelete} />);
   };
   
   const renderColumnCards = (text) => {
     return renderList
       ?.filter((ele) => ele.status === text)
-      .map((data) => <Card key={data._id} data={data} />);
+      .map((data) => <Card key={data._id} data={data} deleteCard={handleDelete} />);
   };
-
+ 
   const handleChangeImportance = (event) => {
     if (event.currentTarget.value === "ALL") setRenderList(list);
     else
@@ -50,6 +53,8 @@ function Tasks() {
         list.filter((data) => data.importance === event.currentTarget.value)
       );
   };
+
+  const handleDelete = (id) => dispatch(deleteTask(id))
 
 
   // para filtrar por busqueda
