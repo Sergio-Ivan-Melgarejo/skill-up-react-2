@@ -1,0 +1,44 @@
+main {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+ }
+ 
+ main section {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: var(--global-border-radius);
+    text-align: center;
+ }
+ 
+ @media screen and (min-width: 600px) {
+    main section {
+       border: var(--global-border);
+       width: 400px;
+       background-color: white;
+    }
+ }
+
+ 
+main section a {
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    max-width: 350px;
+    padding: 10px;
+    background-color: var(--global-primary-color);
+    border: 1px solid var(--global-primary-color);
+    color: var(--global-bg-color-soft);
+    border-radius: var(--global-border-radius);
+    margin: auto;
+}
+
+main section a:hover{
+    background-color: transparent;
+    color: var(--global-primary-color);
+}
