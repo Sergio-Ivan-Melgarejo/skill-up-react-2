@@ -129,7 +129,6 @@ function Tasks() {
               />
             </div>
             <select name="importance" onChange={handleChangeImportance}>
-              <option value="">Seleccionar una prioridad</option>
               <option value="ALL">Todas</option>
               <option value="LOW">Baja</option>
               <option value="MEDIUM">Media</option>
