@@ -14,7 +14,7 @@ const server = setupServer(
         status_code: 200,
         message: "OK",
         result: {
-          continente: ["America", "Europa", "Otro","zorro"],
+          continente: ["America", "Europa", "Otro","server mokeado"],
           region: ["Otro", "Latam", "Brasil", "America del Norte"],
           Rol: ["Team Member", "Team Leader"],
         },
@@ -33,6 +33,6 @@ it("fetch options", async () => {
 
   expect(
     // para busquedas asincronas se usa find en vez de get
-    await screen.findByRole("option", { name: "Europa" })
+    await screen.findByRole("option", { name: "server mokeado" })
   ).toBeInTheDocument();
 });

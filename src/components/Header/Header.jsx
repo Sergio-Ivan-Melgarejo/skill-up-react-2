@@ -18,6 +18,7 @@ const Header = () => {
   return (
     <header>
       <img src={img} alt="Go Scrum" />
+      <span>Estamos en {process.env.NODE_ENV} en el puerto: {process.env.REACT_APP_PORT}</span>
       <div className="wrapper_right_header">
         <div>
           <button onClick={()=> navigate("/donate",{replace:true})} >Donar</button>
