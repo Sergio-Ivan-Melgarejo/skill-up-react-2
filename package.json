@@ -1,5 +1,6 @@
 {
   "name": "skill-up-react-2",
+  "homepage": "https://Sergio-Ivan-Melgarejo.github.io/skill-up-react-2",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -11,6 +12,7 @@
     "@testing-library/user-event": "^13.2.1",
     "formik": "^2.2.9",
     "framer-motion": "^6.3.4",
+    "gh-pages": "^4.0.0",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-loading-skeleton": "^3.1.0",

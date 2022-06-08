@@ -10,7 +10,7 @@ import './index.css';
 const root = createRoot(document.getElementById('root'));
 root.render(
   <StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename='skill-up-react-2/'>
       <Provider store={store}>
         <App />
       </Provider>
