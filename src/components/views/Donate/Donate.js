@@ -2,7 +2,7 @@ import "./Donate.css";
 
 function Donate() {
   return (
-    <main>
+    <main className="donate">
       <section>
         <h1>Colaborá con el proyecto</h1>
         <a

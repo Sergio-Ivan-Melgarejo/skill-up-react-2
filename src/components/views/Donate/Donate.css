@@ -1,11 +1,11 @@
-main {
+.donate {
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
  }
  
- main section {
+ .donate section {
     width: 100%;
     padding: 20px;
     display: flex;
@@ -17,7 +17,7 @@ main {
  }
  
  @media screen and (min-width: 600px) {
-    main section {
+    .donate section {
        border: var(--global-border);
        width: 400px;
        background-color: white;
@@ -25,7 +25,7 @@ main {
  }
 
  
-main section a {
+.donate section a {
     text-decoration: none;
     display: block;
     width: 100%;
@@ -38,7 +38,7 @@ main section a {
     margin: auto;
 }
 
-main section a:hover{
+.donate section a:hover{
     background-color: transparent;
     color: var(--global-primary-color);
 }
