@@ -20,6 +20,7 @@ const Register = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    // get data for selects
     fetch(`${API_ENPOINT}auth/data`)
       .then((res) => res.json())
       .then((data) => {
@@ -181,7 +182,7 @@ const Register = () => {
             id="role"
             className={errors.role && touched.role ? "error" : ""}
           >
-            <option value="">Seleccionar Rol</option>
+            <option value="">Seleccionar rol...</option>
             {data?.Rol?.map((ele) => (
               <option key={ele} value={ele}>
                 {ele}
@@ -202,7 +203,7 @@ const Register = () => {
             id="continent"
             className={errors.continent && touched.continent ? "error" : ""}
           >
-            <option value="">Seleccionar Continente</option>
+            <option value="">Seleccionar continente...</option>
             {data?.continente?.map((ele) => (
               <option key={ele} value={ele}>
                 {ele}

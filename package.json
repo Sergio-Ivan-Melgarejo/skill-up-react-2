@@ -49,6 +49,7 @@
     ]
   },
   "devDependencies": {
-    "@redux-devtools/extension": "^3.2.2"
+    "@redux-devtools/extension": "^3.2.2",
+    "msw": "^0.42.1"
   }
 }
