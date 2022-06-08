@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkskill_up_react_2=self.webpackChunkskill_up_react_2||[]).push([[799],{3313:function(e,n,r){r.r(n);var s=r(184);n.default=function(){return(0,s.jsxs)("div",{className:"container",children:[(0,s.jsx)("h2",{children:"Error404"}),(0,s.jsx)("p",{children:"no se encontro la p\xe1gina solicitada"})]})}}}]);
+//# sourceMappingURL=799.16a0ece7.chunk.js.map
