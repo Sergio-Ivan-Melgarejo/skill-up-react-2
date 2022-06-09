@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import img from "../../img/logo/logo_small.png";
+import img from "../../img/ba07183d2d7c30f783053b0a454f0264.png";
 import "./header.css";
 
 const Header = () => {
@@ -18,7 +18,6 @@ const Header = () => {
   return (
     <header>
       <img src={img} alt="Go Scrum" />
-      <span>Estamos en {process.env.NODE_ENV} en el puerto: {process.env.REACT_APP_PORT}</span>
       <div className="wrapper_right_header">
         <div>
           <button onClick={()=> navigate("/donate",{replace:true})} >Donar</button>

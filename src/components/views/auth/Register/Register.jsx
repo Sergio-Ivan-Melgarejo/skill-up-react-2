@@ -5,6 +5,10 @@ import * as Yup from "yup";
 import { v4 as uuidv4 } from "uuid";
 import { Switch, FormControlLabel } from "@mui/material";
 
+// utils
+import swalAlert from "../../../../utils/swalAlert";
+
+// Styles
 import "../auth.css";
 
 const { REACT_APP_API_ENDPOINT : API_ENPOINT } = process.env;
@@ -87,6 +91,7 @@ const Register = () => {
       })
       .catch((error) => {
         console.log(error)
+        console.log("sda")
       })
   };
 
@@ -232,12 +237,15 @@ const Register = () => {
               id="region"
               className={errors.region && touched.region ? "error" : ""}
             >
-              <option value="">Seleccionar Región</option>
-              {data?.region.sort()?.map((ele) => (
+            <option value="">Seleccionar Región</option>
+              <option value="Brazil">Brazil</option>
+              <option value="Latam">Latam</option>
+              <option value="Otro">Otro</option>
+              {/* {data?.region.sort()?.map((ele) => (
                 <option key={ele} value={ele}>
                   {ele}
                 </option>
-              ))}
+              ))} */}
             </select>
             {errors.region && touched.region && (
               <div className="error-message">{errors.region}</div>

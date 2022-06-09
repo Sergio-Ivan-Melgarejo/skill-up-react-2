@@ -32,9 +32,13 @@
 
 .auth > form > a {
   text-decoration: none;
-  color: var(--global-secondary-color);
+  color: #3E4542;
   font-size: 16px;
   margin: 5px 0;
+}
+
+.auth > form > a:hover{
+  color: var(--global-secondary-color);
 }
 
 .auth > form > div > label {

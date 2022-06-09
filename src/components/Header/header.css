@@ -4,11 +4,12 @@ header {
     justify-content: space-between;
     padding: 12px 15px;
     background-color: var(--global-bg-color-soft);
-    background-color: #fff;
+    background-color: var(--global-bg-color-soft);
 }
 
 header > img {
-    width: 90px;
+    width:82px;
+    height:17px;
 }
 
 header > div {
