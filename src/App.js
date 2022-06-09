@@ -36,7 +36,7 @@ export default function App() {
     <AnimatePresence>
       <Routes location={location} key={location.pathname}>
         <Route
-          path="/"
+          index
           element={
             <RequiredAuth>
              <motion.div
@@ -82,15 +82,17 @@ export default function App() {
         <Route
           path="/registered/:teamID"
           element={
-            <motion.div
-              className="page"
-              initial="out"
-              animate="in"
-              exit="out"
-              variants={pageTransition}
-            >
-              <Registered />
-            </motion.div>
+            <RequiredAuth>
+              <motion.div
+                className="page"
+                initial="out"
+                animate="in"
+                exit="out"
+                variants={pageTransition}
+              >
+                <Registered />
+              </motion.div>
+            </RequiredAuth>
           }
         />
         <Route

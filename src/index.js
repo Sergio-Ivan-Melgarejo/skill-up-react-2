@@ -10,7 +10,7 @@ import './index.css';
 const root = createRoot(document.getElementById('root'));
 root.render(
   <StrictMode>
-    <HashRouter basename='skill-up-react-2/'>
+    <HashRouter>
       <Provider store={store}>
         <App />
       </Provider>
