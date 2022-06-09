@@ -52,19 +52,14 @@ const Login = () => {
         if(data.status_code >= 200 && data.status_code < 300) {
           localStorage.setItem("token", data?.result?.token);
           localStorage.setItem("userName", data?.result?.user?.userName);
-          swalAlert({
-            title: 'logeado',
-            text: `El servidor respondió "${data.message}", por favor introduce credenciales válidas.`
-          })
           navigate("/", { replace: true });
-          
         } else {
           swalAlert({
             title: 'Credenciales invalidas',
             text: `El servidor respondió "${data.message}", por favor introduce credenciales válidas.`
           })
         }
-      });
+      })
   };
 
   const formik = useFormik({ initialValues, validationSchema, onSubmit });

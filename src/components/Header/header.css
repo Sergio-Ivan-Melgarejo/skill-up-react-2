@@ -2,7 +2,8 @@ header {
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     display: flex;
     justify-content: space-between;
-    padding: 12px 15px;
+    align-items: center;
+    padding: 8px 15px;
     background-color: var(--global-bg-color-soft);
     background-color: var(--global-bg-color-soft);
 }
@@ -12,21 +13,17 @@ header > img {
     height:17px;
 }
 
-header > div {
-    color: var(--global-primary-color);
-}
-
 header > div > .close{
     cursor: pointer;
-    padding: 2px 8px;
     border-radius: 50%;
     font-weight: bolder;
     transform: translateY(-1px);
-    padding: 2px 9px 4px;
+    padding: 0px 5px 1px;
     border-radius: var(--global-border-radius);
     border: 1px solid transparent;
     transition: all .3s ease-in-out;
     font-weight: bolder;
+    color: var(--global-primary-color);
 }
 
 header > div > .close:hover {
@@ -37,25 +34,18 @@ header > div > .close:hover {
 
 .wrapper_right_header{
     display: flex;
-    gap: 1em;
+    gap: 5px;
     align-items: center;
 }
 
 header > div > .back{
-    display: none;
-}
-
-@media screen and (min-width:600px) {
-    header > div > .back{
-        display: block
-    }
+    font-size: 13px;
 }
 
 header button {
-    border-radius: 4px;
+    border-radius: var(--global-border-radius);
     border-width: 1px;
-    font-size: 0.7rem;
-    font-weight: 700;
+    font-size: 12px;
     margin: 0 0.2rem 0.15rem 0;
     padding: 0.1rem 0.3rem;
     background-color: var(--global-primary-color);
@@ -63,10 +53,35 @@ header button {
     color: white;
     cursor: pointer; 
     transition: all .3s ease-in-out;
+    border: 1px solid var(--global-primary-color);
+    width: 45px;
+    height: 20px;
+    line-height: 10px;
+    box-shadow: 0px 4px 2px rgba(0, 0, 0, 0.15);
 }
 
 header button:hover{
     background-color: transparent;
-    border: 1px solid var(--global-primary-color);
     color: var(--global-primary-color);
+}
+
+@media screen and (min-width:600px) {
+    header{
+        padding: 12px 15px;
+    }
+    
+    header > div > .back{
+        font-size: 15px;
+    }
+
+    .wrapper_right_header{
+        gap: 10px;
+    }
+
+    header button{
+        font-size: 15px;
+        width: 70px;
+        height: 25px;
+        line-height: 12.5px;
+    }
 }
