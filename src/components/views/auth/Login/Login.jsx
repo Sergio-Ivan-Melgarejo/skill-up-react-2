@@ -12,7 +12,7 @@ import swalAlert from "../../../../utils/swalAlert";
 const {REACT_APP_API_ENDPOINT : API_ENPOINT } = process.env;
 
 const msg = {
-  reduired: "* Este campor obligatorio",
+  reduired: "*Campo obligatorio",
   "userName-min": "* Tiene que contener al menos 4 caracteres",
   userName: "* Tiene que ser un nombre valido",
 };
@@ -106,12 +106,8 @@ const Login = () => {
         <div>
           <button type="submit">Enviar</button>
         </div>
-        <div>
-          <p>
             {/* <span>¿No tienes una cuenta? </span> */}
             <Link to="/register">Registrarme</Link>
-          </p>
-        </div>
       </form>
     </div>
   );

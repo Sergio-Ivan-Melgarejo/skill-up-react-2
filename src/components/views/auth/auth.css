@@ -3,15 +3,19 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: var(--global-bg-color-soft);
 }
 
 .auth > form{
   width: 100%;
+  max-width: 500px;
+  margin: auto;
   padding: 20px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   flex-direction: column;
+  background-color: var(--global-bg-color-soft);
 }
 
 .auth > form > div{
@@ -26,14 +30,24 @@
   padding: 8px 0;
 }
 
-.auth > form > div  a {
+.auth > form > a {
   text-decoration: none;
   color: var(--global-secondary-color);
+  font-size: 16px;
+  margin: 5px 0;
+}
+
+.auth > form > div > label {
+  font-size: 16px;
+  font-weight: 400;
 }
 
 .auth > form > div > input,
 .auth > form > div > select {
   padding: 8px;
+  background-color: var(--global-bg-color-soft);
+  outline-color: var(--global-primary-color);
+  border: var(--global-border);
 }
 
 .auth > form > div > div {
@@ -45,6 +59,7 @@
 .auth select {
   border-radius: var(--global-border-radius);
   border: var(--global-border);
+  color: var(--global-text-color-2);
 }
 
 .auth button {
@@ -56,7 +71,6 @@
     padding: 10px !important;
     font-size: 16px;
     cursor: pointer;
-    font-weight: 700;
 }
 
 .auth button:hover {
@@ -73,19 +87,29 @@
 .auth input.error,
 .auth select.error,
 .auth textarea.error {
-    border: solid 1px var(--global-error-color);
-    color: var(--global-error-color);
+    border: solid 1px var(--global-primary-color);
+    color: var(--global-primary-color);
 }
 
 @media screen and (min-width:600px) {
-    .auth{
-        background-color: var(--global-bg-color-soft);
+    .auth {
+      background-color: transparent;
     }
-
     .auth > form{
         border:  var(--global-border);
-        width: 400px;
         border-radius:  var(--global-border-radius);
         background-color: #fff;
     }
+}
+
+
+.auth .switch{
+  background-color: #fff;
+}
+
+.auth .switch span:nth-child(1) {
+}
+
+.auth .switch span:nth-child(2) {
+  font-size: 12px !important;
 }

@@ -10,7 +10,7 @@ import "../auth.css";
 const { REACT_APP_API_ENDPOINT : API_ENPOINT } = process.env;
 
 const msg = {
-  reduired: "* Este campor obligatorio",
+  reduired: "*Campo obligatorio",
   "userName-min": "* Tiene que contener al menos 4 caracteres",
   email: "* Tiene que ser un email valido",
 };
@@ -79,10 +79,15 @@ const Register = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        navigate(`/registered/${data?.result?.user?.teamID}`, {
-          replace: true,
-        });
-      });
+        if(data?.status_code < 300 && data?.status_code >= 200) {
+          navigate(`/registered/${data?.result?.user?.teamID}`, {
+            replace: true,
+          });
+        }
+      })
+      .catch((error) => {
+        console.log(error)
+      })
   };
 
   const formik = useFormik({ initialValues, validationSchema, onSubmit });
@@ -112,7 +117,7 @@ const Register = () => {
             className={errors.userName && touched.userName ? "error" : ""}
           />
           {errors.userName && touched.userName && (
-            <span className="error-message">{errors.userName}</span>
+            <div className="error-message">{errors.userName}</div>
           )}
         </div>
         <div>
@@ -127,7 +132,7 @@ const Register = () => {
             className={errors.password && touched.password ? "error" : ""}
           />
           {errors.password && touched.password && (
-            <span className="error-message">{errors.password}</span>
+            <div className="error-message">{errors.password}</div>
           )}
         </div>
         <div>
@@ -142,7 +147,7 @@ const Register = () => {
             className={errors.email && touched.email ? "error" : ""}
           />
           {errors.email && touched.email && (
-            <span className="error-message">{errors.email}</span>
+            <div className="error-message">{errors.email}</div>
           )}
         </div>
         <FormControlLabel
@@ -153,10 +158,12 @@ const Register = () => {
                 formik.setFieldValue("switch", !formik.values.switch)
               }
               name="switch"
-              color="secondary"
+              color="error"
             />
           }
+          className="switch"
           label="¿Pertenecés a un equipo ya creado?"
+          
         />
         {values.switch && (
           <div>
@@ -190,7 +197,7 @@ const Register = () => {
             ))}
           </select>
           {errors.role && touched.role && (
-            <span className="error-message">{errors.role}</span>
+            <div className="error-message">{errors.role}</div>
           )}
         </div>
         <div>
@@ -211,7 +218,7 @@ const Register = () => {
             ))}
           </select>
           {errors.continent && touched.continent && (
-            <span className="error-message">{errors.continent}</span>
+            <div className="error-message">{errors.continent}</div>
           )}
         </div>
         {values.continent === "America" ? (
@@ -233,19 +240,14 @@ const Register = () => {
               ))}
             </select>
             {errors.region && touched.region && (
-              <span className="error-message">{errors.region}</span>
+              <div className="error-message">{errors.region}</div>
             )}
           </div>
         ) : null}
         <div>
           <button type="submit">Enviar</button>
         </div>
-        <div>
-          <p>
-            {/* <span>¿Y tienes una cuenta? </span> */}
-            <Link to="/login">Iniciar sesión</Link>
-          </p>
-        </div>
+          <Link to="/login">Ir a iniciar sesión</Link>
       </form>
     </div>
   );
