@@ -73,7 +73,7 @@ function TaskForm() {
             value={values.title}
           />
           {errors.title && touched.title && (
-            <span className="error-message">{errors.title}</span>
+            <div className="error-message">{errors.title}</div>
           )}
         </div>
 
@@ -91,7 +91,7 @@ function TaskForm() {
             <option value="FINISHED">Terminada</option>
           </select>
           {errors.status && touched.status && (
-            <span className="error-message">{errors.status}</span>
+            <div className="error-message">{errors.status}</div>
           )}
         </div>
 
@@ -109,11 +109,11 @@ function TaskForm() {
             <option value="HIGH">Alta</option>
           </select>
           {errors.importance && touched.importance && (
-            <span className="error-message">{errors.importance}</span>
+            <div className="error-message">{errors.importance}</div>
           )}
         </div>
 
-        <div>
+        <div className="div-textarea">
           <textarea
             name="description"
             onChange={handleChange}
@@ -123,11 +123,11 @@ function TaskForm() {
             value={values.description}
           />
           {errors.description && touched.description && (
-            <span className="error-message">{errors.description}</span>
+            <div className="error-message">{errors.description}</div>
           )}
         </div>
 
-        <button className="btn" type="submit">Crear</button>
+        <button type="submit">Crear</button>
       </form>
       <ToastContainer />
     </section>

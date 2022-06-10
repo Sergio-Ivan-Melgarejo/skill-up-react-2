@@ -35,3 +35,7 @@ h1{
   font-weight: 500;
   margin: 0;
 }
+
+@media (min-width:900px) {
+  
+}
