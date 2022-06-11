@@ -4,6 +4,9 @@ import * as Yup from "yup";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+// utils
+import swalAlert from "../../utils/swalAlert";
+
 // Style
 import "./task-form.css";
 
@@ -30,8 +33,6 @@ function TaskForm() {
   });
 
   const onSubmit = () => {
-    console.log({ task: values })
-
     fetch(`${API_ENDPOINT}task`, {
       method: "POST",
       headers: {
@@ -42,10 +43,23 @@ function TaskForm() {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
-        resetForm();
-        toast("Tarea creada");
-      });
+        // console.log(data);
+        if(data?.status_code < 300 && data?.status_code >= 200) {
+          resetForm();
+          toast("Tarea creada");
+        } else {
+          swalAlert({
+            title: `Ocurrió un error`,
+            text: "Ocurrió un error, vuelva a intentarlo más tarde."
+          })
+        }
+      })
+      .catch((error) => {
+        swalAlert({
+          title: `Ocurrió un error`,
+          text: "Ocurrió un error, vuelva a intentarlo más tarde."
+        })
+      })
   };
 
   const formik = useFormik({ initialValues, validationSchema, onSubmit });
