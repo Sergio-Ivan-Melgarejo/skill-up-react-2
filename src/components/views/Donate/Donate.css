@@ -6,7 +6,8 @@
  }
  
  .donate section {
-    width: 100%;
+   width: calc(100% - 2em);
+   max-width: 500px;
     padding: 20px;
     display: flex;
     flex-wrap: wrap;
@@ -14,14 +15,19 @@
     flex-direction: column;
     border-radius: var(--global-border-radius);
     text-align: center;
+    height: 100%;
+    background-color: var(--global-bg-color-soft);
  }
  
  @media screen and (min-width: 600px) {
-    .donate section {
-       border: var(--global-border);
-       width: 400px;
-       background-color: white;
-    }
+   .donate{
+      background-color: var(--global-bg-color);
+   }
+   .donate section {
+      border: var(--global-border);
+      width: 500px;
+      background-color: var(--global-bg-color-soft);
+   }
  }
 
  
@@ -35,7 +41,7 @@
     border: 1px solid var(--global-primary-color);
     color: var(--global-bg-color-soft);
     border-radius: var(--global-border-radius);
-    margin: auto;
+    margin: 1em auto 0; 
 }
 
 .donate section a:hover{

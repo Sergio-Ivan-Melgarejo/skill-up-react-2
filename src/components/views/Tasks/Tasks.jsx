@@ -39,7 +39,6 @@ function Tasks() {
   });
   
 
-
   // para renderizar los items
   const renderAllCards = () => {
     return renderList?.map((data) => <Card key={data._id} data={data} deleteCard={handleDelete} editCardStatus={handleEditCardStatus} />);
@@ -62,22 +61,8 @@ function Tasks() {
       toRender = toRender.filter((data) => data.importance === filter.importance) 
     }
 
-
     setRenderList(toRender)
   }, [filter,list]);
-
-  
-  // para filtrar por busqueda
-  // const [search, setSearch] = useState("");
-
-  // useEffect(() => {
-  //  if (search) {
-  //   setRenderList(
-  //     list.filter((data) => data.title.toLowerCase().startsWith(search.toLowerCase()))
-  //   );   
-  // } 
-  // else setRenderList(list)
-  // }, [search]);
 
   const handleSearch = debounce((e) => {
     setFilter(prev => {return {...prev, search: e?.target?.value}});

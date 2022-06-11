@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import img from "../../img/ba07183d2d7c30f783053b0a454f0264.png";
 import "./header.css";
@@ -20,7 +20,7 @@ const Header = () => {
       <img src={img} alt="Go Scrum" />
       <div className="wrapper_right_header">
         <div>
-          <button onClick={()=> navigate("/donate",{replace:true})} >Donar</button>
+          <Link to="/donate" >Donar</Link>
         </div>
         <div className="back">Tareas creadas: {tasks.length}</div>
         <div className="back">{localStorage.getItem("userName")}</div>
