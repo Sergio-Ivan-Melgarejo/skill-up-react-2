@@ -28,7 +28,7 @@ export const getTasks = (path) => (dispatch) => {
     .catch((error) => dispatch(tasksFailure(error)));
 };
 
-export const deleteTask = (id) => (dispatch) => {
+export const deleteTask = (id,task = "") => (dispatch) => {
   dispatch(tasksRequest());
   fetch(`${API_ENDPOINT}task/${id}`, {
     method: "DELETE",
@@ -38,11 +38,11 @@ export const deleteTask = (id) => (dispatch) => {
     },
   })
     .then((res) => res.json())
-    .then(() => dispatch(getTasks("")))
+    .then(() => dispatch(getTasks(task)))
     .catch((error) => dispatch(tasksFailure(error)));
 };
 
-export const editTaskStatus = (data) => (dispatch) => {
+export const editTaskStatus = (data,task = "") => (dispatch) => {
   const status = {
     "NEW":"IN PROGRESS",
     "IN PROGRESS":"FINISHED",
@@ -66,6 +66,6 @@ export const editTaskStatus = (data) => (dispatch) => {
     })
   })
     .then((res) => res.json())
-    .then(() => dispatch(getTasks("")))
+    .then(() => dispatch(getTasks(task)))
     .catch((error) => dispatch(tasksFailure(error)));
 };

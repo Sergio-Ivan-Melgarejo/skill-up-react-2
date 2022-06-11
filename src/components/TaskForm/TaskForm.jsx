@@ -24,7 +24,7 @@ const initialValues = {
   description: "",
 };
 
-function TaskForm() {
+function TaskForm({handleGetCarts}) {
   const validationSchema = Yup.object().shape({
     title: Yup.string().required(msg["reduired"]).min(6, msg["title-min"]),
     status: Yup.string().required(msg["reduired"]),
@@ -47,16 +47,17 @@ function TaskForm() {
         if(data?.status_code < 300 && data?.status_code >= 200) {
           resetForm();
           toast("Tarea creada");
+          handleGetCarts();
         } else {
           swalAlert({
-            title: `Ocurrió un error`,
+            title: `Ocurrió un error 1`,
             text: "Ocurrió un error, vuelva a intentarlo más tarde."
           })
         }
       })
       .catch((error) => {
         swalAlert({
-          title: `Ocurrió un error`,
+          title: `Ocurrió un error 2`,
           text: "Ocurrió un error, vuelva a intentarlo más tarde."
         })
       })

@@ -6,6 +6,7 @@
     max-width: 600px;
     margin: auto;
     background-color: var(--global-bg-color-soft);
+    min-height: calc(100vh - 55px);
 }
 
 #tasks .wrapper_list {
