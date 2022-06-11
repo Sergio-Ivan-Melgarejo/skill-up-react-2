@@ -38,12 +38,12 @@ function Card({
       </button>
       <p>{showMore ? description : limitString(description).string}</p>
       {!showMore && limitString(description).addButton && (
-        <button type="button" onClick={() => setShowMore(true)}>
+        <button className="btn" type="button" onClick={() => setShowMore(true)}>
           Ver más
         </button>
       )}
       {showMore && (
-        <button type="button" onClick={() => setShowMore(false)}>
+        <button className="btn" type="button" onClick={() => setShowMore(false)}>
           Ver menos
         </button>
       )}

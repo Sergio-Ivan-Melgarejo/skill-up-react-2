@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 // Style
 import "./task-form.css";
 
-const { REACT_APP_API_ENPOINT: API_ENPOINT } = process.env;
+const { REACT_APP_API_ENDPOINT: API_ENDPOINT } = process.env;
 
 const msg = {
   reduired: "* Este campor obligatorio",
@@ -30,7 +30,9 @@ function TaskForm() {
   });
 
   const onSubmit = () => {
-    fetch(`${API_ENPOINT}task`, {
+    console.log({ task: values })
+
+    fetch(`${API_ENDPOINT}task`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

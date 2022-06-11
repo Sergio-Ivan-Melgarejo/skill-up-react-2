@@ -88,9 +88,6 @@
 }
 
 @media (min-width:900px) {
-    .task-form > form > div {
-        margin: 0;
-    }
     .task-form input,
     .task-form select,
     .task-form textarea {
@@ -118,7 +115,9 @@
         align-items: start;
         gap: 12px;
     }
-    
+    .task-form > form > div {
+        margin: 0;
+    }
     .task-form .div-textarea{
         grid-column: 3 span;
     }

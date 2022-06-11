@@ -83,15 +83,32 @@ const Register = () => {
     })
       .then((res) => res.json())
       .then((data) => {
+        // console.log(data)
         if(data?.status_code < 300 && data?.status_code >= 200) {
           navigate(`/registered/${data?.result?.user?.teamID}`, {
             replace: true,
           });
+          swalAlert({
+            title: `Se ha Registrado`
+          });
+        } 
+        else if (data?.status_code === 409) {
+          swalAlert({
+            title: `Ocurrió un error`,
+            text: "El nombre o el email, ya fueron ingresados, pruebe con otro."
+          })
+        } else {
+          swalAlert({
+            title: `Ocurrió un error`,
+            text: "Ocurrió un error, vuelva a intentarlo más tarde."
+          })
         }
       })
       .catch((error) => {
-        console.log(error)
-        console.log("sda")
+        swalAlert({
+          title: `Ocurrió un error`,
+          text: "Ocurrió un error, vuelva a intentarlo más tarde."
+        })
       })
   };
 
