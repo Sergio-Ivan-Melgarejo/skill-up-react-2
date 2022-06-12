@@ -25,10 +25,11 @@
     border: 1px solid transparent;
     transition: all .3s ease-in-out;
     font-weight: bolder;
+    background-color: #ffffff70;
+    border: var(--global-border);
 }
 
 #tasks .card .close:hover {
-    background-color: #00000010;
     border: 1px solid var(--global-primary-color);
     color: var(--global-primary-color);
 }

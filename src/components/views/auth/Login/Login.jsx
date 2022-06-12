@@ -49,7 +49,9 @@ const Login = () => {
     })
       .then((res) => res.json())
       .then((data) => {
+        // console.log(data)
         if(data.status_code >= 200 && data.status_code < 300) {
+          localStorage.setItem("teamID", data?.result?.user?.teamID);
           localStorage.setItem("token", data?.result?.token);
           localStorage.setItem("userName", data?.result?.user?.userName);
           navigate("/", { replace: true });

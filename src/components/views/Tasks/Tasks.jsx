@@ -27,6 +27,7 @@ import { useResize } from "../../../hooks/useResize";
 
 // Style
 import "./tasks.css";
+import Footer from "../../Footer/Footer";
 
 function Tasks() {
   const { isPhone } = useResize();
@@ -185,6 +186,7 @@ function Tasks() {
           )}
         </section>
       </main>
+      <Footer/>
     </>
   );
 }

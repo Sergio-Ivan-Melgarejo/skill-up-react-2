@@ -11,6 +11,7 @@ import Login from "./components/views/auth/Login/Login";
 import Register from "./components/views/auth/Register/Register";
 import Registered from "./components/views/Registered/Registered";
 import Donate from "./components/views/Donate/Donate";
+import Footer from "./components/Footer/Footer";
 
 const Error404 =  lazy(() => import("./components/views/Error404/Error404"));
 
