@@ -27,15 +27,19 @@ import { useResize } from "../../../hooks/useResize";
 
 // Style
 import "./tasks.css";
-
+import Footer from "../../Footer/Footer";
 
 function Tasks() {
   const { isPhone } = useResize();
   const [list, setList] = useState(null);
   const [tasksFromWho, setTasksFromWho] = useState("ALL");
   const [renderList, setRenderList] = useState(null);
+  const [filter, setFilter] = useState({
+    importance:"ALL",
+    search:"",
+  });
   
-  
+
   // para renderizar los items
   const renderAllCards = () => {
     return renderList?.map((data) => <Card key={data._id} data={data} deleteCard={handleDelete} editCardStatus={handleEditCardStatus} />);
@@ -46,40 +50,35 @@ function Tasks() {
       ?.filter((ele) => ele.status === text)
       .map((data) => <Card key={data._id} data={data} deleteCard={handleDelete} editCardStatus={handleEditCardStatus} />);
   };
- 
-  const handleChangeImportance = (event) => {
-    if (event.currentTarget.value === "ALL") setRenderList(list);
-    else
-      setRenderList(
-        list.filter((data) => data.importance === event.currentTarget.value)
-      );
-  };
-
-  const handleDelete = (id) => dispatch(deleteTask(id))
-  const handleEditCardStatus = (data) => dispatch(editTaskStatus(data))
-
-  // para filtrar por busqueda
-  const [search, setSearch] = useState("");
 
   useEffect(() => {
-   if (search) {
-    setRenderList(
-      list.filter((data) => data.title.toLowerCase().startsWith(search.toLowerCase()))
-    );   
-  } 
-  else setRenderList(list)
-  }, [search]);
+    let toRender = list;
+    
+    if (filter.search !== "") {
+      toRender = toRender.filter((data) => data.title.toLowerCase().startsWith(filter.search.toLowerCase()))
+    } else toRender = list
+
+    if (filter.importance !== "ALL") {
+      toRender = toRender.filter((data) => data.importance === filter.importance) 
+    }
+
+    setRenderList(toRender)
+  }, [filter,list]);
 
   const handleSearch = debounce((e) => {
-    setSearch(e?.target?.value);
+    setFilter(prev => {return {...prev, search: e?.target?.value}});
   }, 1000);
 
 
   // para manejar la data por redux
   const dispatch = useDispatch();
 
+  const handleDelete = (id) => dispatch(deleteTask(id,tasksFromWho === "ME" ? "me" : ""))
+  const handleEditCardStatus = (data) => dispatch(editTaskStatus(data,tasksFromWho === "ME" ? "me" : ""))
+  const handleGetCarts = () => dispatch(getTasks(tasksFromWho === "ME" ? "me" : ""))
+
   useEffect(() => {
-    dispatch(getTasks(tasksFromWho === "ME" ? "me" : ""));
+    handleGetCarts()
   }, [tasksFromWho, dispatch]);
 
   const { tasks, error, loading } = useSelector((state) => state.tasksReducer);
@@ -97,13 +96,13 @@ function Tasks() {
     <>
       <Header />
       <main id="tasks">
-        <TaskForm />
+        <TaskForm handleGetCarts={handleGetCarts} />
         <section className="wrapper_list">
           <div className="list_header">
             <h2>Mis tareas</h2>
           </div>
           <div className="filters">
-            <FormControl>
+            <FormControl  >
               <RadioGroup
                 row
                 aria-labelledby="demo-row-radio-buttons-group-label"
@@ -111,12 +110,22 @@ function Tasks() {
               >
                 <FormControlLabel
                   value="ALL"
-                  control={<Radio />}
+                  control={<Radio sx={{
+                    color: "#8B8B8B",
+                    '&.Mui-checked': {
+                      color: "#FF452B",
+                    },
+                  }} />}
                   label="Todas"
                 />
                 <FormControlLabel
                   value="ME"
-                  control={<Radio />}
+                  control={<Radio sx={{
+                    color: "#8B8B8B",
+                    '&.Mui-checked': {
+                      color: "#FF452B",
+                    },
+                  }}/>}
                   label="Mis tareas"
                 />
               </RadioGroup>
@@ -128,7 +137,7 @@ function Tasks() {
                 onChange={handleSearch}
               />
             </div>
-            <select name="importance" onChange={handleChangeImportance}>
+            <select name="importance" onChange={(e) => setFilter(prev => {return {...prev, importance:e.target.value}})}>
               <option value="ALL">Todas</option>
               <option value="LOW">Baja</option>
               <option value="MEDIUM">Media</option>
@@ -177,6 +186,7 @@ function Tasks() {
           )}
         </section>
       </main>
+      <Footer/>
     </>
   );
 }

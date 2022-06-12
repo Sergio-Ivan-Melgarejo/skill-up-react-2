@@ -1,31 +1,34 @@
 header {
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     display: flex;
     justify-content: space-between;
-    padding: 12px 15px;
+    align-items: center;
+    padding: 8px 15px;
     background-color: var(--global-bg-color-soft);
-    background-color: #fff;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.25);
+    position: sticky;
+    max-width: 600px;
+    width: 100%;
+    top: 0;
+    margin: auto;
+    z-index: 10;
 }
 
 header > img {
-    width: 90px;
-}
-
-header > div {
-    color: var(--global-primary-color);
+    width:82px;
+    height:17px;
 }
 
 header > div > .close{
     cursor: pointer;
-    padding: 2px 8px;
     border-radius: 50%;
     font-weight: bolder;
     transform: translateY(-1px);
-    padding: 2px 9px 4px;
+    padding: 0px 5px 1px;
     border-radius: var(--global-border-radius);
     border: 1px solid transparent;
     transition: all .3s ease-in-out;
     font-weight: bolder;
+    color: var(--global-primary-color);
 }
 
 header > div > .close:hover {
@@ -36,25 +39,20 @@ header > div > .close:hover {
 
 .wrapper_right_header{
     display: flex;
-    gap: 1em;
+    gap: 5px;
     align-items: center;
 }
 
 header > div > .back{
-    display: none;
+    font-size: 13px;
 }
 
-@media screen and (min-width:600px) {
-    header > div > .back{
-        display: block
-    }
-}
-
-header button {
-    border-radius: 4px;
+header div a {
+    display: block;
+    text-decoration: none;
+    border-radius: var(--global-border-radius);
     border-width: 1px;
-    font-size: 0.7rem;
-    font-weight: 700;
+    font-size: 12px;
     margin: 0 0.2rem 0.15rem 0;
     padding: 0.1rem 0.3rem;
     background-color: var(--global-primary-color);
@@ -62,10 +60,42 @@ header button {
     color: white;
     cursor: pointer; 
     transition: all .3s ease-in-out;
+    border: 1px solid var(--global-primary-color);
+    width: 45px;
+    height: 20px;
+    line-height: 13px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    text-align: center;
 }
 
-header button:hover{
+header div a:hover{
     background-color: transparent;
-    border: 1px solid var(--global-primary-color);
     color: var(--global-primary-color);
+}
+
+@media screen and (min-width:900px) {
+    header{
+        padding: 12px 15px;
+        max-width: none;
+        width: 100%;
+    }
+    
+    header > div > .back{
+        font-size: 15px;
+    }
+
+    .wrapper_right_header{
+        gap: 10px;
+    }
+
+    header div a{
+        font-size: 15px;
+        width: 70px;
+        height: 25px;
+        line-height: 18px;
+    }
+    
+    header > div > .close {
+        padding: 2px 9px 4px;
+    }
 }

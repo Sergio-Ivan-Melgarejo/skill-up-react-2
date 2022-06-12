@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./Donate.css";
 
 function Donate() {
@@ -12,6 +13,7 @@ function Donate() {
         >
           Donar
         </a>
+        <Link to="/" >No lo hare!, Volver</Link>
       </section>
     </main>
   );

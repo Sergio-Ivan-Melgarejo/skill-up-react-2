@@ -4,10 +4,13 @@ import * as Yup from "yup";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+// utils
+import swalAlert from "../../utils/swalAlert";
+
 // Style
 import "./task-form.css";
 
-const { REACT_APP_API_ENPOINT: API_ENPOINT } = process.env;
+const { REACT_APP_API_ENDPOINT: API_ENDPOINT } = process.env;
 
 const msg = {
   reduired: "* Este campor obligatorio",
@@ -21,7 +24,7 @@ const initialValues = {
   description: "",
 };
 
-function TaskForm() {
+function TaskForm({handleGetCarts}) {
   const validationSchema = Yup.object().shape({
     title: Yup.string().required(msg["reduired"]).min(6, msg["title-min"]),
     status: Yup.string().required(msg["reduired"]),
@@ -30,7 +33,7 @@ function TaskForm() {
   });
 
   const onSubmit = () => {
-    fetch(`${API_ENPOINT}task`, {
+    fetch(`${API_ENDPOINT}task`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -40,10 +43,24 @@ function TaskForm() {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
-        resetForm();
-        toast("Tarea creada");
-      });
+        // console.log(data);
+        if(data?.status_code < 300 && data?.status_code >= 200) {
+          resetForm();
+          toast("Tarea creada");
+          handleGetCarts();
+        } else {
+          swalAlert({
+            title: `Ocurrió un error 1`,
+            text: "Ocurrió un error, vuelva a intentarlo más tarde."
+          })
+        }
+      })
+      .catch((error) => {
+        swalAlert({
+          title: `Ocurrió un error 2`,
+          text: "Ocurrió un error, vuelva a intentarlo más tarde."
+        })
+      })
   };
 
   const formik = useFormik({ initialValues, validationSchema, onSubmit });
@@ -73,7 +90,7 @@ function TaskForm() {
             value={values.title}
           />
           {errors.title && touched.title && (
-            <span className="error-message">{errors.title}</span>
+            <div className="error-message">{errors.title}</div>
           )}
         </div>
 
@@ -91,7 +108,7 @@ function TaskForm() {
             <option value="FINISHED">Terminada</option>
           </select>
           {errors.status && touched.status && (
-            <span className="error-message">{errors.status}</span>
+            <div className="error-message">{errors.status}</div>
           )}
         </div>
 
@@ -109,11 +126,11 @@ function TaskForm() {
             <option value="HIGH">Alta</option>
           </select>
           {errors.importance && touched.importance && (
-            <span className="error-message">{errors.importance}</span>
+            <div className="error-message">{errors.importance}</div>
           )}
         </div>
 
-        <div>
+        <div className="div-textarea">
           <textarea
             name="description"
             onChange={handleChange}
@@ -123,11 +140,11 @@ function TaskForm() {
             value={values.description}
           />
           {errors.description && touched.description && (
-            <span className="error-message">{errors.description}</span>
+            <div className="error-message">{errors.description}</div>
           )}
         </div>
 
-        <button className="btn" type="submit">Crear</button>
+        <button type="submit">Crear</button>
       </form>
       <ToastContainer />
     </section>

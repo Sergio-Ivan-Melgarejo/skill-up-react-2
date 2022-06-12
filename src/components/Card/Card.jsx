@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { ToastContainer, toast } from 'react-toastify';
 import "./Card.css";
 
 const limitString = (str) => {
@@ -24,9 +25,15 @@ function Card({
 }) {
   const [showMore, setShowMore] = useState(false);
   const dataTime = new Date(createdAt).toLocaleString() + " hr.";
+
+  const handleDelete = () => {
+    deleteCard(_id)
+    toast("Tarea eliminada");
+  }
+
   return (
     <div className="card">
-      <div className="close" onClick={() => deleteCard(_id)}>x</div>
+      <div className="close" onClick={handleDelete}>x</div>
       <h3>{title}</h3>
       <h6>{dataTime}</h6>
       <h5>{userName}</h5>
@@ -38,12 +45,12 @@ function Card({
       </button>
       <p>{showMore ? description : limitString(description).string}</p>
       {!showMore && limitString(description).addButton && (
-        <button type="button" onClick={() => setShowMore(true)}>
+        <button className="btn" type="button" onClick={() => setShowMore(true)}>
           Ver más
         </button>
       )}
       {showMore && (
-        <button type="button" onClick={() => setShowMore(false)}>
+        <button className="btn" type="button" onClick={() => setShowMore(false)}>
           Ver menos
         </button>
       )}
