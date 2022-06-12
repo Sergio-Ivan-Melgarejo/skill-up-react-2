@@ -85,7 +85,7 @@ const Register = () => {
       .then((data) => {
         // console.log(data)
         if(data?.status_code < 300 && data?.status_code >= 200) {
-          navigate(`/registered/${data?.result?.user?.teamID}`, {
+          navigate(`/login`, {
             replace: true,
           });
           swalAlert({

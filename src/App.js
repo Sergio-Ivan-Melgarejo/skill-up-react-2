@@ -9,9 +9,7 @@ import "./App.css";
 import Tasks from "./components/views/Tasks/Tasks";
 import Login from "./components/views/auth/Login/Login";
 import Register from "./components/views/auth/Register/Register";
-import Registered from "./components/views/Registered/Registered";
 import Donate from "./components/views/Donate/Donate";
-import Footer from "./components/Footer/Footer";
 
 const Error404 =  lazy(() => import("./components/views/Error404/Error404"));
 
@@ -78,22 +76,6 @@ export default function App() {
             >
               <Register />
             </motion.div>
-          }
-        />
-        <Route
-          path="/registered/:teamID"
-          element={
-            <RequiredAuth>
-              <motion.div
-                className="page"
-                initial="out"
-                animate="in"
-                exit="out"
-                variants={pageTransition}
-              >
-                <Registered />
-              </motion.div>
-            </RequiredAuth>
           }
         />
         <Route
