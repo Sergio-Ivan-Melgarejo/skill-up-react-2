@@ -40,6 +40,10 @@ select {
   cursor: pointer;
 }
 
+.relative{
+  position: relative;
+}
+
 @media (min-width:900px) {
   body {
     background-color: var(--global-bg-color-soft);

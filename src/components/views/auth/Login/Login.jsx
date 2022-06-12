@@ -2,11 +2,15 @@ import { useFormik } from "formik";
 import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 
+// Componens
+import Loading from "../../../Loading/Loading";
+
 // Style
 import "../auth.css";
 
 // utils
 import swalAlert from "../../../../utils/swalAlert";
+import { useState } from "react";
 
 const {REACT_APP_API_ENDPOINT : API_ENPOINT } = process.env;
 
@@ -23,7 +27,8 @@ const initialValues = {
 
 const Login = () => {
   const navigate = useNavigate();
-
+  const [loading, setLoading] = useState(false);
+  
 
   const validationSchema = Yup.object().shape({
     userName: Yup.string()
@@ -33,6 +38,7 @@ const Login = () => {
   });
 
   const onSubmit = () => {
+    setLoading(true)
     const { userName, password } = values
     
     fetch(`${API_ENPOINT}auth/login`, {
@@ -55,11 +61,13 @@ const Login = () => {
           localStorage.setItem("token", data?.result?.token);
           localStorage.setItem("userName", data?.result?.user?.userName);
           navigate("/", { replace: true });
+          setLoading(false)
         } else {
           swalAlert({
             title: 'Credenciales invalidas',
             text: `El servidor respondió "${data.message}", por favor introduce credenciales válidas.`
           })
+          setLoading(false)
         }
       })
   };
@@ -88,28 +96,42 @@ const Login = () => {
             name="userName"
             id="userName"
             className={errors.userName && touched.userName ? "error" : ""}
+            disabled={loading}
           />
           {errors.userName && touched.userName && <div>{errors.userName}</div>}
         </div>
-        <div>
+        <div className="relative">
           <label htmlFor="password">Contraseña</label>
-          <input
-            onChange={handleChange}
-            onBlur={handleBlur}
-            value={values.password}
-            type="password"
-            name="password"
-            id="password"
-            className={errors.password && touched.password ? "error" : ""}
-          />
+            <input
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.password}
+                type="password"
+                name="password"
+                id="password"
+                className={errors.password && touched.password ? "error" : ""}
+                disabled={loading}
+              />
           {errors.password && touched.password && <div>{errors.password}</div>}
         </div>
         <div>
-          <button type="submit">Enviar</button>
+          <button className={loading ? "relative loading" : "relative "} type="submit">
+            {   
+              loading 
+              ? <Loading />
+              : "Enviar"
+            }
+          </button>
         </div>
             {/* <span>¿No tienes una cuenta? </span> */}
-            <Link to="/register">Registrarme</Link>
+            { loading 
+            ? null
+            : <Link to="/register">Registrarme</Link>}
       </form>
+      {    
+        
+      }
+  
     </div>
   );
 };
